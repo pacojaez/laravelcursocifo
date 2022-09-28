@@ -1,30 +1,8 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layout.master')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Edit Moto {{ config('app.name', 'LaraBikes') }}</title>
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous" />
-    <!-- Styles -->
-    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
-    <script defer src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js"></script>
-    {{-- @livewireStyles --}}
-    <!-- Scripts -->
-    {{-- <script src="{{ mix('js/app.js') }}" defer></script> --}}
-</head>
+@section('titulo', 'Actualizacion de moto de Larabikes')
 
-<body class="bg-grey">
-    @include ('components.navbar')
-    @include ('components.toast')
+@section('contenido')
     <form method='POST' action="{{ route('bike.update', $bike->id) }}" enctype="multipart/form-data">
         {{-- @csrf --}}
         {{ csrf_field() }}
@@ -136,6 +114,4 @@
     <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/colored-shadow.js"></script>
     <!-- from cdn -->
     <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script>
-</body>
-
-</html>
+@endsection

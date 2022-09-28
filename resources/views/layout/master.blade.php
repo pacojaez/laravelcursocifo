@@ -59,7 +59,7 @@
     @include('components.navbar')
     @includeWhen(Session::has('success'), 'layout.success')
     @includeWhen($errors->any(), 'layout.error')
-    <main class="flex flex-col items-center justify-center mt-32">
+    <main class="flex flex-col items-center justify-center mt-2">
     <x-alert />
 
         @yield('contenido')
@@ -68,9 +68,8 @@
         @include('components.footer')
         <!-- from cdn -->
     <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
-        data-turbolinks-eval="false" data-turbo-eval="false"></script>
-    @stack('scripts')
+    {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
+        data-turbolinks-eval="false" data-turbo-eval="false"></script> --}}
+    {{-- @stack('scripts') --}}
 </body>
-
 </html>

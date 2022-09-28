@@ -17,9 +17,19 @@ class BikeController
         return view('bikes.list', ['bikes' => $bikes, 'total' => $total]);
     }
 
+    // public function create()
+    // {
+    //     dd('Hello');
+    //     return view('bikes.create');
+    // }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-
+        // dd('?hello');
         return view('bikes.create');
     }
 
@@ -47,17 +57,17 @@ class BikeController
             ->with('success' , "Moto $bike->marca $bike->modelo guardada correctamente");
     }
 
-    public function show(int $id)
+    public function show( Bike $bike)
     {
 
-        $bike = Bike::findOrFail($id);
+        // $bike = Bike::findOrFail($bike);
 
         return view('bikes.show', ['bike'=>$bike]);
     }
 
-    public function edit(int $id)
+    public function edit(Bike $bike )
     {
-        $bike = Bike::findOrFail($id);
+        // $bike = Bike::findOrFail($id);
 
         return view('bikes.update', ['bike'=>$bike]);
     }
@@ -97,5 +107,31 @@ class BikeController
 
         return back()
         ->with('success' , "Moto $bike->marca $bike->modelo borrada correctamente");
+    }
+
+    /**
+     * search method by marca and modelo
+     */
+    public function search( Request $request ){
+
+        $request->validate([
+           'marca' => 'required|max:16',
+           'modelo' => 'max:16'
+        ]);
+
+        $marca = $request->input('marca');
+        $modelo  = $request->input('modelo');
+
+        $bikes = Bike::where( "marca", "LIKE", "%$marca%")
+                ->where('modelo', "LIKE", "%$modelo%")->get();
+
+        $total = count($bikes);
+
+        $bikes = Bike::where( "marca", "LIKE", "%$marca%")
+                        ->where('modelo', "LIKE", "%$modelo%")
+                        ->paginate(12)
+                        ->appends(['marca'=> $marca, 'modelo' => $modelo ]);
+
+        return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'marca'=> $marca, 'modelo' => $modelo]);
     }
 }

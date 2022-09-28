@@ -11,7 +11,5 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array<int, string>
      */
-    protected $except = [
-        //
-    ];
+    protected $except = ['testMiddleware', 'testingMiddleware']; // creamos un array con las URI de las rutas excluidas de pasar por el VerifyCsrfToken
 }
