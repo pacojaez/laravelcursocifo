@@ -18,39 +18,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" />
-    {{-- @livewireStyles --}}
-    <!-- Scripts -->
-    {{-- <script src="{{ mix('js/app.js') }}" defer></script> --}}
-
-    {{-- <style>
-        :root {
-            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            --ring-offset-shadow: 0 0 #0000;
-            --ring-shadow: 0 0 #0000;
-        }
-
-        .card_open {
-            animation-duration: 2s;
-            animation-name: card_open;
-        }
-
-        @keyframes card_open {
-            from {
-                height: 1%;
-                box-shadow: var(--shadow);
-            }
-
-            to {
-                height: 100%;
-                box-shadow: var(--ring-offset-shadow, 0 0 #0000), var(--ring-shadow, 0 0 #0000), var(--shadow);
-            }
-        }
-    </style> --}}
 </head>
 
 <body class="bg-grey">
     @include ('components.navbar')
-    @include ('components.toast')
+    @includeWhen( Session::has('success'), 'components.toast')
+    {{-- @include ('components.toast') --}}
     {{ $bikes->links() }}
     <div class="grid w-full grid-cols-1 gap-4 mt-16 mb-6 break-words shadow-lg rounded-xl md:grid-cols-4">
         @foreach ($bikes as $bike)
@@ -65,7 +38,7 @@
                 </div>
                 <div @class([
                     'card-body',
-                    'bg-red-300/20' => !$bike->matriculada,
+                    'bg-red-500/20' => !$bike->matriculada,
                     'text-gray-500' => !$bike->matriculada,
                 ])>
                     <a href="#">

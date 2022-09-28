@@ -34,3 +34,12 @@ Route::get('/clearcache', function() {
 Route::resource('bike', BikeController::class);
 
 
+Route::get('/installation', function(){
+    return view('installation');
+})->name('installation');
+
+Route::get('/bladedirectives', function(){
+    return view('bladedirectives');
+})->name('bladedirectives');
+
+
