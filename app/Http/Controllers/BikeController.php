@@ -113,8 +113,16 @@ class BikeController
         return view('bikes.delete', ['bike'=>$bike]);
     }
 
-    public function destroy(Bike $bike )
+    public function destroy( Bike $bike )
     {
+        //METODO PARA COMPROBAR EN EL CONTROLADOR SI LA RUTA ESTÁ CORRCETAMENTE FIRMADA
+        // si usamos el middleware 'signed' en la ruta ya no hace falta pasarle al controlador la request
+        // if( !$request->hasValidSignature() )
+        //     abort(403, 'No estas autorizado a borrar esa moto');
+
+
+        //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
+        URL::setKeyResolver( fn() => config('app.route_key'));
 
          $bike->delete();
 

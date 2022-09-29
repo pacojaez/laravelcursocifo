@@ -15,7 +15,7 @@
             </h2>
         </div>
         <div class="flex flex-row justify-center w-1/4">
-            <div class=" mt-2 card-header" >
+            <div class="mt-2 card-header" >
                 <a href="{{ route( 'bike.show', [ 'bike' => $bike ])}}" blur-shadow-image="true">
                     <img class="rounded-lg"
                         src="{{ asset( $bike->image )}}"
@@ -27,8 +27,10 @@
     </div>
 
     <div class="p-2 space-y-2">
-
-        <form class="mt-2" action={{ route('bike.destroy', ['bike' => $bike]) }} method="POST">
+        <!-- ruta firmada-->
+        {{-- <form class="mt-2" action="{{ URL::signedRoute ('bike.destroy', ['bike' => $bike]) }}" method="POST"> --}}
+        <!-- ruta firmada durante un minuto -->
+        <form class="mt-2" action="{{ URL::temporarySignedRoute('bike.destroy', now()->addSeconds(5), ['bike' => $bike]) }}" method="POST">
             @csrf
             <input type="hidden" name="_method" value="DELETE">
             <div class="flex justify-center mt-6">

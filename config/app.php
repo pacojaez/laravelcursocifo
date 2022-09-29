@@ -123,6 +123,8 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'route_key' => env('APP_ROUTE_KEY'),
+
     'cipher' => 'AES-256-CBC',
 
     /*

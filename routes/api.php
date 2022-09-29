@@ -20,8 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+// ruta que solo se puede usar desde Firefox gracias al middleware FireFoxRules
 Route::get('/bikes', function(){
     $json = json_encode(Bike::orderBy('id', 'DESC')->get());
 
     return response($json)->header('Content-Type', 'application/json');
-});
+})->middleware('firefoxrules');

@@ -18,11 +18,11 @@
             <a href="{{ route('routing')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
                 Routing
             </a>
-            <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
-                Using with Preprocessors
+            <a href="{{ route('middleware') }}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
+                Middleware
             </a>
-            <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
-                Optimizing for Production
+            <a href="{{ route('url')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
+                Url y Redirecciones
             </a>
             <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
                 Browser Support

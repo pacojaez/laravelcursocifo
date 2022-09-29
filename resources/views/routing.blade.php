@@ -71,7 +71,7 @@
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>DESACTIVAR MIDDLEWARE app/Http/Kernel.php</h2>
             <p>  Editando el fichero app/Http/Kernel.php y comentando la línea en la que
-                se indica que el grupo web se debe usar este middleware.</p>
+                se indica que el grupo web debe usar este middleware.</p>
         </div>
         <x-code>
             /**<br>
@@ -88,7 +88,6 @@
                     // \App\Http\Middleware\VerifyCsrfToken::class,<br>
                     \Illuminate\Routing\Middleware\SubstituteBindings::class,<br>
                 ],
-
         </x-code>
     </div>
     <div class="flex flex-col w-full">
@@ -102,6 +101,40 @@
         </div>
         <x-code>
                 Route::fallback([WelcomeController::class, 'index']);
+        </x-code>
+    </div>
+    <div class="flex flex-col w-full">
+        <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
+            <h2>PROTECCIÓN CSRF</h2>
+            <p>
+
+            </p>
+        </div>
+        <x-code>
+                @ csrf <br>
+                csrf_field()
+        </x-code>
+    </div>
+    <div class="flex flex-col w-full">
+        <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
+            <h2>OBJETO ROUTE</h2>
+            <p>
+                You may use the current, currentRouteName, and currentRouteAction methods on the Route facade to access information about the route handling the incoming request:
+            </p>
+            <a href="https://laravel.com/docs/9.x/routing#accessing-the-current-route" class="" target="blank">
+                <p>
+                    https://laravel.com/docs/9.x/routing#accessing-the-current-route
+                </p>
+            </a>
+        </div>
+        <x-code>
+            use Illuminate\Support\Facades\Route;<br>
+            $route = Route::current(); //retorna un objeto Route<br>
+            <br>
+            $name = Route::currentRouteName(); //’bikes.edit’<br>
+            <br>
+            $action = Route::currentRouteAction();<br>
+            //’App\Http\Controllers\BikeController@edit‘<br>
         </x-code>
     </div>
 

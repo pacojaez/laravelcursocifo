@@ -26,24 +26,37 @@ Route::get('/', function () {
 
 
 Route::get('/clearcache', function() {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCodeView = Artisan::call('view:clear');
-    $optimizeClear = Artisan::call('optimize:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('optimize:clear');
     return view('components.cachecleared');
 })->name('clearcache');
 
+
+//RUTAS ABIERTAS SIN MIDDLEWARE
 Route::match(['GET', 'POST'], '/bikesearch', [BikeController::class, 'search'])->name('bike.search');
 // Route::resource('bike', BikeController::class);
 Route::get('/bike', [BikeController::class, 'index'])->name('bike.index');
-Route::get('/bike/create', [BikeController::class, 'create'])->name('bike.create');
+// Route::get('/bike/create', [BikeController::class, 'create'])->name('bike.create');
 Route::get('/bike/show/{bike}', [BikeController::class, 'show'])->name('bike.show');
-Route::get('/bike/delete/{bike}', [BikeController::class, 'delete'])->name('bike.delete');
-Route::post('/bike', [BikeController::class, 'store'])->name('bike.store');
-Route::get('/bike/{bike}/edit', [BikeController::class, 'edit'])->name('bike.edit');
-Route::put('/bike/{bike}', [BikeController::class, 'update'])->name('bike.update');
-Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy');
+// Route::get('/bike/delete/{bike}', [BikeController::class, 'delete'])->name('bike.delete');
+// Route::post('/bike', [BikeController::class, 'store'])->name('bike.store');
+// Route::get('/bike/{bike}/edit', [BikeController::class, 'edit'])->name('bike.edit');
+// Route::put('/bike/{bike}', [BikeController::class, 'update'])->name('bike.update');
+// Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy');
 
 
+//GRUPO DE RUTAS PARA AÑADIR ->middleware('isAdmin)
+Route::prefix('admin')->group( function(){
+
+    Route::get('/bike/create', [BikeController::class, 'create'])->name('bike.create');
+    Route::get('/bike/delete/{bike}', [BikeController::class, 'delete'])->name('bike.delete');
+    Route::post('/bike', [BikeController::class, 'store'])->name('bike.store');
+    Route::get('/bike/{bike}/edit', [BikeController::class, 'edit'])->name('bike.edit');
+    Route::put('/bike/{bike}', [BikeController::class, 'update'])->name('bike.update');
+    Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy')->middleware('signed');
+
+});
 
 
 Route::get('/installation', function(){
@@ -58,24 +71,30 @@ Route::get('/routing', function(){
     return view('routing');
 })->name('routing');
 
+Route::get('/middleware', function(){
+    return view('middleware');
+})->name('middleware');
 
+Route::get('/url', function(){
+    return view('url');
+})->name('url');
 
 /**
  * RUTAS PARA TESTEAR csrf token restriction
  */
 
-//  Route::get('/testMiddleware', function(){
-//     return 'Petición por GET';
-//  });
-//  Route::post('/testMiddleware', function(){
-//     return 'Petición por POST';
-//  });
-//  Route::put('/testMiddleware', function(){
-//     return 'Petición por PUT';
-//  });
-//  Route::delete('/testMiddleware', function(){
-//     return 'Petición por DELETE';
-//  });
+ Route::get('/testMiddleware', function(){
+    return 'Petición por GET';
+ });
+ Route::post('/testMiddleware', function(){
+    return 'Petición por POST';
+ });
+ Route::put('/testMiddleware', function(){
+    return 'Petición por PUT';
+ });
+ Route::delete('/testMiddleware', function(){
+    return 'Petición por DELETE';
+ });
 
 
 // Route::any('/testMiddleware', function( Request $request ){
