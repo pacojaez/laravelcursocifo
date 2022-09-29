@@ -50,18 +50,20 @@ class BikeController
         $savePhoto = BikePhotoUploadService::store($request);
 
         $bike = Bike::create($request->all());
+        if( $request->input('matricula')){
+            $bike->matriculada = TRUE;
+            $bike->update();
+        }
         $bike->image = $savePhoto;
         $bike->save();
 
-        return redirect()->route('bike.show', $bike->id)
+        return redirect()->route('bike.show', $bike)
             ->with('success' , "Moto $bike->marca $bike->modelo guardada correctamente");
     }
 
     public function show( Bike $bike)
     {
-
-        // $bike = Bike::findOrFail($bike);
-
+// dd($bike);
         return view('bikes.show', ['bike'=>$bike]);
     }
 
@@ -92,6 +94,12 @@ class BikeController
             $bike->image = $savePhoto;
             $bike->update();
         }
+
+        if( $request->input('matricula')){
+            $bike->matriculada = TRUE;
+            $bike->update();
+        }
+
         $bike->update($request->only('marca', 'modelo', 'kms', 'caballos', 'color', 'matricula', 'precio'));
         //TO DO BORRAR FOTO ANTIGUA DEL SISTEMA DE ARCHIVOS
 
@@ -100,13 +108,18 @@ class BikeController
                 ->with('success' , "Moto $bike->marca $bike->modelo actualizada correctamente");
     }
 
+    public function delete( Bike $bike)
+    {
+        return view('bikes.delete', ['bike'=>$bike]);
+    }
+
     public function destroy(Bike $bike )
     {
 
          $bike->delete();
 
-        return back()
-        ->with('success' , "Moto $bike->marca $bike->modelo borrada correctamente");
+         return redirect()->route('bike.index')
+                ->with('success' , "Moto $bike->marca $bike->modelo borrada correctamente");
     }
 
     /**

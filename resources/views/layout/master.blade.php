@@ -8,10 +8,11 @@
     <title>{{ config('app.name', 'LaraBikes') }}</title>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     <!-- Styles -->
     {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
     <script defer src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     <link href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -24,8 +25,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/animationsvg.css') }}">
-    <link href="https://tailwindcomponents.com/css/component.nature.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('css/animationsvg.css') }}"> --}}
+    {{-- <link href="https://tailwindcomponents.com/css/component.nature.css" rel="stylesheet"> --}}
     @vite('resources/css/app.css')
 
     <style>
@@ -40,14 +41,14 @@
     <!-- Scripts -->
 
     <script defer src="{{ mix('js/app.js') }}"></script>
-    <script defer src="{{ mix('js/todosFilter.js') }}" defer></script>
+    {{-- <script defer src="{{ mix('js/todosFilter.js') }}" defer></script> --}}
 
-    <script type="module">
+    {{-- <script type="module">
         import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
-    </script>
+    </script> --}}
 
     <!-- ANIME -->
-    <script src="{{ asset('js/anime.min.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/anime.min.js') }}" defer></script> --}}
     <!-- Alpine v3 -->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     {{-- <script src="https://unpkg.com/alpinejs" defer></script> --}}
@@ -66,10 +67,9 @@
 
     </main>
         @include('components.footer')
-        <!-- from cdn -->
-    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script>
+
     {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
         data-turbolinks-eval="false" data-turbo-eval="false"></script> --}}
-    {{-- @stack('scripts') --}}
+    {{-- @stack('scripts')
 </body>
 </html>

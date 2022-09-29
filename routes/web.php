@@ -36,7 +36,8 @@ Route::match(['GET', 'POST'], '/bikesearch', [BikeController::class, 'search'])-
 // Route::resource('bike', BikeController::class);
 Route::get('/bike', [BikeController::class, 'index'])->name('bike.index');
 Route::get('/bike/create', [BikeController::class, 'create'])->name('bike.create');
-Route::get('/bike/{bike}', [BikeController::class, 'show'])->name('bike.show');
+Route::get('/bike/show/{bike}', [BikeController::class, 'show'])->name('bike.show');
+Route::get('/bike/delete/{bike}', [BikeController::class, 'delete'])->name('bike.delete');
 Route::post('/bike', [BikeController::class, 'store'])->name('bike.store');
 Route::get('/bike/{bike}/edit', [BikeController::class, 'edit'])->name('bike.edit');
 Route::put('/bike/{bike}', [BikeController::class, 'update'])->name('bike.update');
