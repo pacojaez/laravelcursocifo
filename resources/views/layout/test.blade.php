@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'LaraBikes') }}</title>
+    <title> {{ config('app.name', 'LaraBikes') }}</title>
     <link rel="icon" type="image/png" href="{{ asset('img/components/favicon.png')}}">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -58,7 +58,7 @@
 </head>
 
 <body class="overflow-x-hidden">
-    @include('components.navbar')
+    @include('components.testnavbar')
     @includeWhen(Session::has('success'), 'layout.success')
     @includeWhen($errors->any(), 'layout.error')
     <main class="flex flex-col items-center justify-center mt-2">
@@ -69,13 +69,12 @@
     </main>
         @include('components.footer')
 
-        <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
-        <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/colored-shadow.js"></script>
-        <!-- from cdn -->
-        <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script>
-
     {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
         data-turbolinks-eval="false" data-turbo-eval="false"></script> --}}
     {{-- @stack('scripts') --}}
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/colored-shadow.js"></script>
+    <!-- from cdn -->
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script>
 </body>
 </html>

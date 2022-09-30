@@ -26,4 +26,4 @@ Route::get('/bikes', function(){
     $json = json_encode(Bike::orderBy('id', 'DESC')->get());
 
     return response($json)->header('Content-Type', 'application/json');
-})->middleware('firefoxrules');
+})->middleware('firefoxrules')->name('firefoxrules');

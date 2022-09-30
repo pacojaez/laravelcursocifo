@@ -3,7 +3,7 @@
 @section('titulo', 'Instalación de Larabikes')
 
 @section('contenido')
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2 class="text-xl font-bold">COMO GENERAR UN ARCHIVO DE RUTAS PARA PRUEBAS</h2>
         </div>
@@ -26,7 +26,7 @@
                 </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Copiamos el archivo web.php y lo renombramos a test.php
@@ -63,7 +63,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Pasamos todas las rutas que usamos para testear a ese nuevo archivo, por ejemplo:
@@ -77,7 +77,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Todas la rutas que usemos para test tendrán el prefijo test
@@ -90,7 +90,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Al ponerle un alias las podemos llamar en cualquier parte de nuestra app con route('testMiddleware')

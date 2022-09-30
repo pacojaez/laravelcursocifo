@@ -1,9 +1,9 @@
 @extends('layout.test')
 
-@section('titulo', 'Cache borrada')
+@section('titulo', 'Test de Larabikes')
 
 @section('contenido')
     <x-testcomponent>
-        The cache has been correctly cleared!!!
+        {{ $testcomponent }}
     </x-testcomponent>
 @endsection

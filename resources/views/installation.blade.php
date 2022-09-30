@@ -3,7 +3,7 @@
 @section('titulo', 'Instalación de Larabikes')
 
 @section('contenido')
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>INSTALACIÓN DE LARAVEL</h2>
         </div>
@@ -11,7 +11,7 @@
             <p> composer create-project laravel/laravel larabikes </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>CORRER EL SERVIDOR</h2>
         </div>
@@ -20,7 +20,7 @@
             <p> php artisan serve </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>Bike Factory </h2>
         </div>
@@ -71,7 +71,7 @@
                 } </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>SeEDING THE DATABASE</h2>
         </div>
@@ -83,7 +83,7 @@
             }
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>CORRIENDO LAS MIGRACIONES</h2>
         </div>

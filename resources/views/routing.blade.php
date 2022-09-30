@@ -3,7 +3,7 @@
 @section('titulo', 'Instalación de Larabikes')
 
 @section('contenido')
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>LISTAR RUTAS</h2>
         </div>
@@ -11,7 +11,7 @@
             <p> php artisan route:list </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>Routes Folders</h2>
         </div>
@@ -22,7 +22,7 @@
             <p> web </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2> </h2>
         </div>
@@ -30,7 +30,7 @@
             <p> app>>Providers>>RouteServiceProvider.php</p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>El prefijo se puede modificar en el proveedor de servicios
                 RouteServiceProvider.</h2>
@@ -47,9 +47,10 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>DESACTIVAR MIDDLEWARE app>>Http>>Middleware>>VerifyCsrfToken.php</h2>
+            <br>
             <p> modificando el array $except para desactivarla solamente para rutas concretas.</p>
         </div>
         <x-code>
@@ -67,9 +68,10 @@
 
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>DESACTIVAR MIDDLEWARE app/Http/Kernel.php</h2>
+            <br>
             <p>  Editando el fichero app/Http/Kernel.php y comentando la línea en la que
                 se indica que el grupo web debe usar este middleware.</p>
         </div>
@@ -90,20 +92,24 @@
                 ],
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>Redirigir si no coincide la ruta con ninguna del fichero web.php</h2>
+            <br>
             <p>  Usando el método Route::fallback(), podemos indicar una ruta
                 que será ejecutada cuando la petición no coincida con ninguna definida.
-
+            </p>
+            <br>
+            <p>
                 Es importante colocar la ruta de fallback como la última del fichero de
-                rutas..</p>
+                rutas..
+            </p>
         </div>
         <x-code>
                 Route::fallback([WelcomeController::class, 'index']);
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>PROTECCIÓN CSRF</h2>
             <p>
@@ -115,7 +121,7 @@
                 csrf_field()
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>OBJETO ROUTE</h2>
             <p>

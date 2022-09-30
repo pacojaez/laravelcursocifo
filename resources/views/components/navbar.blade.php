@@ -42,15 +42,9 @@
                 </a>
                 </li>
                 <li class="flex">
-                    <a class="nav-link" href="{{ route('clearcache')}}">
+                    <a class="nav-link" href="{{ route('testwelcome')}}">
                         <i class="mr-2 text-base material-icons opacity-60"></i>
-                        <span class="{{ $pagina == 'clearcache' ? 'underline font-bold': ''}}">Clear Cache</span>
-                    </a>
-                </li>
-                <li class="flex">
-                    <a class="nav-link" href="{{ route('testMiddleware')}}">
-                        <i class="mr-2 text-base material-icons opacity-60"></i>
-                        <span class="{{ $pagina == 'testMiddleware' ? 'underline font-bold': ''}}">TEST MIDDLEWARE</span>
+                        <span class="{{ $pagina == 'testwelcome' ? 'underline font-bold': ''}}">TEST</span>
                     </a>
                 </li>
                 <li>

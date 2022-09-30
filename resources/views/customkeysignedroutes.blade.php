@@ -3,7 +3,7 @@
 @section('titulo', 'Instalación de Larabikes')
 
 @section('contenido')
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2 class="text-xl font-bold">COMO CREAR UNA CUSTOM KEY PARA LAS RUTAS FIRMADAS</h2>
         </div>
@@ -23,7 +23,7 @@
                 </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 En una vista, por ejemplo, Welcome, le pasamos una variable con el valor de la firma
@@ -40,7 +40,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Podemos ver la firma de la ruta simplemente imprimiendo URL::signedRoute('generatecustomkey')
@@ -52,7 +52,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 En el archivo .env tenemos el APP_KEY <span
@@ -69,7 +69,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Si la imprimimos vemos que clave ha generado
@@ -83,7 +83,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Esa clave es la misma que el APP_KEY del .env
@@ -95,7 +95,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 La clase URLGenerator tiene un método setKeyResolver() que es público, por lo tanto podemos usarlo en
@@ -118,7 +118,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Si usamos ese método de la siguiente manera en el AppServiceProvider metodo boot()
@@ -130,7 +130,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                 Podemos ver ahora en el metodo signedRoute() de URLGenerator::class el resultado
@@ -144,10 +144,10 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
-               Por lo tanto, podemos usar cualquier cadena de texto y pasarsela a setKeyResolver para generar rutas firmadas personales
+               Por lo tanto, podemos usar cualquier cadena de texto (dentro de un Callable que es lo que recibe setKeyResolver) y pasarsela a setKeyResolver para generar rutas firmadas personales
             </p>
             <p class="">
                 Podemos, por ejemplo, generar una app key por medio de Artisan
@@ -160,7 +160,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                Y guardar el valor en una nueva clave de nuestro .env
@@ -172,7 +172,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                En config.app.php declaramos una variable que la lea del .env
@@ -184,7 +184,7 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                En el AppServiceProvider le pasamos el valor de nuestra clave personalizada con el helper config()
@@ -196,14 +196,14 @@
             </p>
         </x-code>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
                Ahora cada vez que usemos una ruta firmada Laravel usará nuestra APP_ROUTE_KEY en vez de la APP_KEY
             </p>
         </div>
     </div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full bg-gray-100">
         <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <p class="">
               PD: las claves del ejemplo han sido refrescadas tras escribir este artículo

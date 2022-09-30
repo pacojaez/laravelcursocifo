@@ -40,8 +40,8 @@
             </div>
         </div>
     </div>
-    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+    {{-- <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
     <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/colored-shadow.js"></script>
     <!-- from cdn -->
-    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script>
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script> --}}
 @endsection
