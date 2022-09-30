@@ -3,7 +3,12 @@
 @section('titulo', 'Detalle de la moto ')
 
 @section('contenido')
-    <div class="grid w-full grid-cols-1 gap-4 mt-16 mb-6 break-words shadow-lg rounded-xl">
+    <div class="flex flex-row justify-center w-full mt-16 mb-6 break-words shadow-lg rounded-xl"
+        style="background-image: url({{ asset($bike->image) }});
+                background-repeat: no-repeat;
+                background-size: cover;
+                :before:background-color: rgba(0,0,0,0.8);"
+        >
         <div class="m-5 border shadow card">
             <div class="mx-4 -mt-6 card-header">
                 <img class="w-auto rounded-lg" src="{{ asset($bike->image) }}"

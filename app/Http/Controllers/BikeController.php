@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bike;
 use App\Services\BikePhotoUploadService;
+use Illuminate\Support\Facades\URL;
 
 class BikeController
 {
@@ -124,9 +125,9 @@ class BikeController
         //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
         URL::setKeyResolver( fn() => config('app.route_key'));
 
-         $bike->delete();
+        $bike->delete();
 
-         return redirect()->route('bike.index')
+        return redirect()->route('bike.index')
                 ->with('success' , "Moto $bike->marca $bike->modelo borrada correctamente");
     }
 

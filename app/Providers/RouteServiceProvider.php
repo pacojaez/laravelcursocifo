@@ -35,6 +35,11 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            //crear un archivo para rutas de test
+            Route::middleware('web')
+                ->prefix('test')
+                ->group(base_path('routes/test.php'));
         });
     }
 

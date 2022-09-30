@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Models\Bike;
 
 class BikeSearch extends Component
 {
@@ -23,6 +24,8 @@ class BikeSearch extends Component
      */
     public function render()
     {
-        return view('components.bike-search');
+        $marcas = Bike::select('marca')->groupBy('marca')->get();
+
+        return view('components.bike-search', ['marcas' => $marcas ]);
     }
 }

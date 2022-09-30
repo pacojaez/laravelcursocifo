@@ -24,11 +24,11 @@
             <a href="{{ route('url')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
                 Url y Redirecciones
             </a>
-            <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
-                Browser Support
+            <a href="{{ route('customkeysignedroutes')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
+                Custom Key Signed Routes
             </a>
-            <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
-                IntelliSense
+            <a href="{{ route('generararchivoroutestest')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
+                Generar Archivo Routes test.php
             </a>
         </div>
 
