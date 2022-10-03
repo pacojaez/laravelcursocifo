@@ -22,8 +22,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // ruta que solo se puede usar desde Firefox gracias al middleware FireFoxRules
-Route::get('/bikes', function(){
+Route::get('/bikesfirefoxjson', function(){
     $json = json_encode(Bike::orderBy('id', 'DESC')->get());
 
     return response($json)->header('Content-Type', 'application/json');
 })->middleware('firefoxrules')->name('firefoxrules');
+
+
+// ruta que solo se puede usar desde Firefox gracias al middleware FireFoxRules
+Route::get('/bikes', function(){
+    $json = json_encode(Bike::orderBy('id', 'DESC')->get());
+
+    return response($json)->header('Content-Type', 'application/json');
+})->name('allbikes');
+
+
+// ruta que nos da las marcas de las motos
+Route::get('/marcasbikes', function(){
+    // dd( Bike::select('marca')->groupBy('marca')->get() );
+    $json = json_encode( Bike::select( 'marca' )->groupBy('marca')->get());
+    // dd($json);
+    return response($json)->header('Content-Type', 'application/json');
+})->name('marcasbikes');

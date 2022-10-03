@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bike;
 use App\Services\BikePhotoUploadService;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Cookie;
 
 
 class BikeController
@@ -76,6 +77,17 @@ class BikeController
         return view('bikes.update', ['bike'=>$bike]);
     }
 
+        // edit the last insert id get by Cookie
+    public function editLast( )
+    {
+        // $bike = Bike::findOrFail($id);
+        if( !Cookie::has('lastInsertId'))
+            return redirect()->route('bike.create');
+
+        $bike = Bike::findOrFail( Cookie::get('lastInsertId'));
+        return view('bikes.update', ['bike'=>$bike]);
+    }
+
     public function update(Request $request, int $id)
     {
         $request->validate([
@@ -107,7 +119,8 @@ class BikeController
 
 
         return back()
-                ->with('success' , "Moto $bike->marca $bike->modelo actualizada correctamente");
+                ->with('success' , "Moto $bike->marca $bike->modelo actualizada correctamente")
+                ->cookie('lastInsertId', $bike->id, 0 );
     }
 
     public function delete( Bike $bike)
@@ -156,5 +169,30 @@ class BikeController
                         ->appends(['marca'=> $marca, 'modelo' => $modelo ]);
 
         return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'marca'=> $marca, 'modelo' => $modelo]);
+    }
+
+    // metodo para borrar las fotos que se quedan colgadas en el sistema de archivos y no estan voonculadas a ninguna moto en la DB
+
+    public function cleanBikeDirectory(){
+        $filesName = \File::files(base_path().'\public\img\bikes\\');
+        // dd($filesName);
+        $arr = [];
+        foreach ($filesName as $file) {
+            $ex = explode("\\"  , $file);
+            if( $ex === '"noimage.png"' ) {
+                continue;
+            }
+
+            array_push($arr , $ex[count($ex) - 1]);
+            // comprobamos que la imagen no está en la DB
+            $imageBike = Bike::where('image', 'like', $ex )->first();
+            if( $imageBike){
+                continue;
+            }else{
+                dd($ex);
+            }
+
+        }
+        dd($arr);
     }
 }

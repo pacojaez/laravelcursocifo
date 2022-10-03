@@ -33,6 +33,3 @@
 {{-- @foreach ($marcas as $data)
       <p><b> {{$data->marca}} </b></p>
 @endforeach --}}
-
-
-

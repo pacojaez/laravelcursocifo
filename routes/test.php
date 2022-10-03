@@ -47,7 +47,6 @@ Route::get('/test', function () {
      Route::delete('/testMiddleware', function(){
         return 'Petición por DELETE';
      });
-
     Route::any('/testMiddlewareany', function( Request $request ){
         $testcomponent = "Metodo usado: ".$request->method();
         return view('test.testMiddlewareany',  ['testcomponent' => $testcomponent ] );
@@ -56,13 +55,17 @@ Route::get('/test', function () {
 
     Route::redirect('/testingMiddleware', '/testMiddleware', 301);
 
-    Route::get('/saludar/{nombre}', function(string $nombre ){
-        return "Hola $nombre";
+    Route::get('/saludar/{nombre}', function(Request $request ){
+        $nombre = $request['nombre'];
+        return view('test.saludar',  ['nombre' => $nombre ] );
     })->name('saludar');
 
-    Route::get('/saludar/{nombre}/{edad}', function( string $nombre, int $edad  ){
-        return "Hola $nombre, tienes $edad";
-    });
+    Route::get('/saludar/{nombre}/{edad}', function( Request $request  ){
+        // return "Hola $nombre, tienes $edad";
+        $nombre = $request['nombre'];
+        $edad = $request['edad'];
+        return view('test.saludar',  ['nombre' => $nombre, 'edad' => $edad ] );
+    })->name('saludaredad');
 
 /**
  * RUTAS PARA COOKIES

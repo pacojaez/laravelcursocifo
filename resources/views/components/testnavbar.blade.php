@@ -51,6 +51,12 @@
                     </a>
                 </li>
                 <li class="flex">
+                    <a class="nav-link" href="{{ route('saludaredad', ['nombre'=>'Paco por default', 'edad' => '54 por defecto'])}}">
+                        <i class="mr-2 text-base material-icons opacity-60"></i>
+                        <span class="{{ $pagina == 'saludaredad' ? 'underline font-bold': ''}}">SALUDAR CON EDAD</span>
+                    </a>
+                </li>
+                <li class="flex">
                     <a class="nav-link" href="{{ route('firefoxrules')}}">
                         <i class="mr-2 text-base material-icons opacity-60"></i>
                         <span class="{{ $pagina == 'firefoxrules' ? 'underline font-bold': ''}}">FIREFOX RULES</span>

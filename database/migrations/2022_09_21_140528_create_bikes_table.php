@@ -28,7 +28,7 @@ return new class extends Migration
             $table->uuid('uuid')->nullable();
             $table->timestamps();
             $table->time('deleted_at')->nullable()->default(NULL);
-            $table->string('image')->nuullable()->default('noimage.png');
+            // $table->string('image')->nuullable()->default('noimage.png');
         });
     }
 
