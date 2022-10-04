@@ -1,5 +1,5 @@
 @if(Session::has('errors'))
-<div>
+<div class="flex flex-row justify-center">
     @foreach( $errors->all() as $error)
     <div class="max-w-xs mb-3 ml-3 text-sm text-white bg-red-500 rounded-md shadow-lg" role="alert">
         <div class="flex p-4">

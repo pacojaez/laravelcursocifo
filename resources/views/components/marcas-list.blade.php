@@ -14,7 +14,7 @@
                     <h1 class="mt-0 mb-3 text-3xl font-light" x-text="title">
                         <!-- title text -->
                     </h1>
-                    <div class="flex flex-wrap pb-8 -mx-2">
+                    <div class="flex flex-wrap justify-center pb-8 -mx-2">
                         <!-- begin: bike card -->
                         <template x-for="bike in bikes" :key="bike.id">
                             <form action="{{ route('bike.search') }}" method="POST" class="flex flex-row">
@@ -26,7 +26,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" x-html="bike.marca"></button>
+                                <button type="submit" x-html="bike.marca" class="hover:underline"></button>
                             </form>
                         </template>
                         <!-- end: bike card -->

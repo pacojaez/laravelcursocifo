@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BikeController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Actions\DeleteUnusedImages;
 use App\Models\Bike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -54,7 +55,7 @@ Route::prefix('admin')->group( function(){
     Route::get('/bike/editLast', [BikeController::class, 'editLast'])->name('bike.editLast');
     Route::put('/bike/{bike}', [BikeController::class, 'update'])->name('bike.update');
     Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy')->middleware('signed');
-    Route::get('/bike/cleanBikeDirectory', [BikeController::class, 'cleanBikeDirectory'])->name('bike.cleanBikeDirectory');
+    Route::get('/bike/cleanBikeDirectory', [ DeleteUnusedImages::class, 'cleanBikeDirectory' ])->name('bike.cleanBikeDirectory');
 
 });
 //****************** FIN GRUPO **********************************/

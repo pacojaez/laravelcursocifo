@@ -13,7 +13,12 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'public'),
+
+    /**
+     * RUTA POR DEFECTO PARA LAS IMAGENES DE MOTOS
+     */
+    'bikesImageDir' => 'img/bikes',
 
     /*
     |--------------------------------------------------------------------------
@@ -71,11 +76,11 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('img') => storage_path('app/img'),
+        // public_path('img') => storage_path('app/img'),
     ],
 
-    'public_uploads' => [
-        'driver' => 'local',
-        'root'   => public_path() . '/img/bikes',
-    ],
+    // 'public_uploads' => [
+    //     'driver' => 'local',
+    //     'root'   => public_path() . '/img/bikes',
+    // ],
 ];

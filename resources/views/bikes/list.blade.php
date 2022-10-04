@@ -18,8 +18,17 @@
             <div class="m-5 border shadow card">
                 <div class="mx-4 -mt-6 card-header">
                     <a href="{{ route('bike.show', $bike->id) }}" blur-shadow-image="true">
-                        <img class="w-auto rounded-lg" src="{{ asset($bike->image) }}"
-                            alt="{{ $bike->marca . '-' . $bike->modelo }}" />
+                        <img class="w-auto rounded-lg hover:animate-pulse"
+                        src="
+                        @if( $bike->image != NULL )
+                            {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}
+                            @else
+                            {{asset('img/components/noimage.png')}}
+                            @endif
+                        "
+                        alt="{{ $bike->marca . '-' . $bike->modelo }}" />
+                        {{-- <img class="w-auto rounded-lg" src="{{ asset($bike->image) }}"
+                            alt="{{ $bike->marca . '-' . $bike->modelo }}" /> --}}
                         {{-- {{ $bike->matriculada }} --}}
 
                     </a>
@@ -30,35 +39,38 @@
                     'text-gray-500' => !$bike->matriculada,
                 ])>
 
-                    <h4 class="font-semibold">{{ $bike->marca }}</h4>
-                    <h4 class="font-semibold">{{ $bike->modelo }}</h4>
+                    <h4 class="text-4xl font-bold">{{ $bike->marca }}</h4>
+                    <h4 class="text-2xl font-semibold">{{ $bike->modelo }}</h4>
 
-                    <p class="mb-4 opcacity-60">
+                    <p class="mb-1 text-xl opcacity-60">
                         Kms: {{ $bike->kms }}
                     </p>
                     @if ($bike->matriculada)
-                        <p class="mb-4 opcacity-60">
+                        <p class="mb-1 text-xl opcacity-60">
                             Matricula: {{ $bike->matricula }}
                         </p>
                     @endif
-                    <p class="mb-4 opcacity-60">
+                    <p class="mb-1 text-xl opcacity-60">
                         Potencia: {{ $bike->caballos }} C.C.
                     </p>
-                    <p class="mb-4 opcacity-60">
+                    <p class="mb-1 text-xl opcacity-60">
                         Kms: {{ $bike->kms }}
                     </p>
-                    <a href="{{ route('bike.show', ['bike' => $bike]) }}">
-                        <img class="p-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
-                            width="50px"src="{{ asset('img/components/show.png') }}" alt="show bike">
-                    </a>
-                    <a href="{{ route('bike.edit', ['bike' => $bike]) }}">
-                        <img class="p-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
-                            width="50px"src="{{ asset('img/components/edit.png') }}" alt="show bike">
-                    </a>
-                    <a href="{{ route('bike.delete', ['bike' => $bike]) }}">
-                        <img class="p-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
-                            width="50px"src="{{ asset('img/components/delete.png') }}" alt="show bike">
-                    </a>
+                    <div class="flex flex-row justify-center">
+                        <a href="{{ route('bike.show', ['bike' => $bike]) }}">
+                            <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
+                                width="40px"src="{{ asset('img/components/show.png') }}" alt="show bike">
+                        </a>
+                        <a href="{{ route('bike.edit', ['bike' => $bike]) }}">
+                            <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
+                                width="40px"src="{{ asset('img/components/edit.png') }}" alt="show bike">
+                        </a>
+                        <a href="{{ route('bike.delete', ['bike' => $bike]) }}">
+                            <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
+                                width="40px"src="{{ asset('img/components/delete.png') }}" alt="show bike">
+                        </a>
+                    </div>
+
                 </div>
             </div>
         @endforeach

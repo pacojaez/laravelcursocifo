@@ -48,21 +48,31 @@ class BikeController
             'color' =>'required|max:255',
             'matricula' =>'max:255',
             'precio' =>'required|numeric',
-            'image' => 'required|image'
+            'image' => 'sometimes|file|image|mimes:jpg,gif,png,webp|max:2048'
         ]);
 
-        $savePhoto = BikePhotoUploadService::store($request);
 
-        $bike = Bike::create($request->all());
-        if( $request->input('matricula')){
-            $bike->matriculada = TRUE;
-            $bike->update();
+        if( $request->hasFile('image') ){
+            $savePhoto = BikePhotoUploadService::store($request);
+            $datos = $request->except('image');
+            $datos += ['image' => $savePhoto];
+
+            if( $request->input('matricula')){
+                $datos += ['matriculada' => TRUE];
+            }
+            $bike = Bike::create( $datos );
+        }else{
+            $datos = $request->except('image');
+            $datos += ['image' => 'noimage.png'];
+            if( $request->input('matricula')){
+                $datos += ['matriculada' => TRUE];
+            }
+            $bike = Bike::create( $datos );
         }
-        $bike->image = $savePhoto;
-        $bike->save();
 
         return redirect()->route('bike.show', $bike)
-            ->with('success' , "Moto $bike->marca $bike->modelo guardada correctamente");
+            ->with('success' , "Moto $bike->marca $bike->modelo guardada correctamente")
+            ->cookie('lastInsertId', $bike->id, 0);
     }
 
     public function show( Bike $bike)
@@ -140,7 +150,12 @@ class BikeController
         //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
         URL::setKeyResolver( fn() => config('app.route_key'));
 
-        $bike->delete();
+        if( $bike->delete() && $bike->image ){
+            // con esta linea desocmentada se borrará del sistenma de archivos
+            // pero como usamos SoftDeletes podemos volver a querer usar la fotro en el futuro por lo que
+            // esta linea se queda comentada
+            // Storage::delete('public/'.config('filesystems.bikesImageDir').'/'.$bike->image );
+        }
 
         return redirect()->route('bike.index')
                 ->with('success' , "Moto $bike->marca $bike->modelo borrada correctamente");
@@ -172,29 +187,4 @@ class BikeController
         return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'marca'=> $marca, 'modelo' => $modelo]);
     }
 
-    // metodo para borrar las fotos que se quedan colgadas en el sistema de archivos y no estan vinculadas a ninguna moto en la DB
-
-    public function cleanBikeDirectory(){
-        // $filesName = \File::files(base_path().'\public\img\bikes\\');
-        $files = Storage::files(public_path().'/img/bikes/');
-        dd($files);
-        $arr = [];
-        foreach ($files as $file) {
-            // dd($file);
-            $ex = explode("\\"  , $file);
-            // array_push($arr , $ex[count($ex) - 1]);
-            // comprobamos que la imagen no está en la DB
-            $imageHasBike = Bike::where('image', 'like', "/img/bikes/.$ex[6]" )->first();
-            if( $imageHasBike === NULL ) {
-                continue;
-            }else{
-                // echo 'hello world';
-                // File::delete();
-                Storage::delete('/public/img/bikes/'.$ex[6]);
-            }
-        }
-
-        return redirect()->back()
-        ->with('success', 'Limpieza del directorio de motos realizada correctamente');
-    }
 }

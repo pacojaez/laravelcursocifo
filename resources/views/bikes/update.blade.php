@@ -40,14 +40,13 @@
                         value="{{ $bike->kms }}">
                 </div>
                 <div class="px-3 md:w-1/2">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-state">
+                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-state">
                         POTENCIA
                     </label>
                     <input
                         class="block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
-                        id="caballos" type="text" placeholder="Potencia de la moto actuales de la moto"
-                        name="caballos" value="{{ $bike->caballos }}">
+                        id="caballos" type="text" placeholder="Potencia de la moto actuales de la moto" name="caballos"
+                        value="{{ $bike->caballos }}">
                 </div>
                 <div class="px-3 mb-6 md:w-1/2 md:mb-0">
                     <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="kms">
@@ -58,8 +57,7 @@
                         id="color" type="text" placeholder="Color" name="color" value="{{ $bike->color }}">
                 </div>
                 <div class="px-3 md:w-1/2">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-state">
+                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-state">
                         MATRÍCULA
                     </label>
                     <input
@@ -67,8 +65,7 @@
                         id="matricula" type="text" placeholder="" name="matricula" value="{{ $bike->matricula }}">
                 </div>
                 <div class="px-3 md:w-1/2">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-state">
+                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-state">
                         PRECIO
                     </label>
                     <input
@@ -77,11 +74,15 @@
                 </div>
                 <div class="px-3 md:w-1/2">
                     <h2>IMAGEN GUARDADA </h2>
-                    <img src="{{ asset($bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}">
+                    <img
+                        src="
+                            @if ($bike->image != null) {{ asset( 'storage/'.config('filesystems.bikesImageDir') . '/' . $bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}
+                            @else
+                            {{ asset('img/components/noimage.png') }} @endif
+                            ">
                 </div>
                 <div class="px-3 md:w-1/2">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-state">
+                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-state">
                         IMAGEN
                     </label>
                     <input type="file" name="image" id="inputFile"
@@ -91,6 +92,12 @@
                         id="image" type="file" accept="image/jpg, image/png, image/jpeg"
                         name="image" > --}}
                 </div>
+                <div class="flex flex-col justify-center px-3 md:w-1/2">
+                    <h2>PREVIEW</h2>
+                    <div class="px-3 preview md:w-1/2">
+                        <p>No hay preseleccionada ninguna imagen</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="flex flex-row justify-center">
@@ -98,20 +105,83 @@
                 class="inline-flex items-center justify-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800">
                 ACTUALIZAR MOTO
             </button>
-
         </div>
     </form>
     <div class="flex flex-row justify-center">
-    <a href="{{ route('bike.destroy', ['bike' => $bike ])  }}" class="">
-    {{-- <a href='{{ url("/bike/destroy/$bike ")  }}" class=""> --}}
-        <button
-            class="inline-flex items-center justify-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800">
-            BORRAR MOTO
-        </button>
-    </a>
+        <a href="{{ route('bike.destroy', ['bike' => $bike]) }}" class="">
+
+            <button
+                class="inline-flex items-center justify-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800">
+                BORRAR MOTO
+            </button>
+        </a>
     </div>
-    {{-- <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
-    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/colored-shadow.js"></script>
-    <!-- from cdn -->
-    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script> --}}
+    <script>
+        const input = document.getElementById('inputFile');
+        const preview = document.querySelector('.preview');
+        input.style.opacity = 100;
+
+        input.addEventListener('change', updateImageDisplay);
+
+        function updateImageDisplay() {
+            while (preview.firstChild) {
+                preview.removeChild(preview.firstChild);
+            }
+
+            const curFiles = input.files;
+            if (curFiles.length === 0) {
+                const para = document.createElement('p');
+                para.textContent = 'No hay imagenes preseleccionadas';
+                preview.appendChild(para);
+            } else {
+                const list = document.createElement('ol');
+                preview.appendChild(list);
+
+                for (const file of curFiles) {
+                    const listItem = document.createElement('li');
+                    const para = document.createElement('p');
+                    if (validFileType(file)) {
+                        para.textContent = `File name ${file.name}, Tamaño ${returnFileSize(file.size)}.`;
+                        const image = document.createElement('img');
+                        image.src = URL.createObjectURL(file);
+
+                        listItem.appendChild(image);
+                        listItem.appendChild(para);
+                    } else {
+                        para.textContent = `File name ${file.name}: No es un tipo de imagen válido. Selecciona una imagen.`;
+                        listItem.appendChild(para);
+                    }
+
+                    list.appendChild(listItem);
+                }
+            }
+        }
+        const fileTypes = [
+            "image/apng",
+            "image/bmp",
+            "image/gif",
+            "image/jpeg",
+            "image/jpg",
+            "image/pjpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/tiff",
+            "image/webp",
+            "image/x-icon"
+        ];
+
+        function validFileType(file) {
+            return fileTypes.includes(file.type);
+        }
+
+        function returnFileSize(number) {
+            if (number < 1024) {
+                return `${number} bytes`;
+            } else if (number >= 1024 && number < 1048576) {
+                return `${(number / 1024).toFixed(1)} KB`;
+            } else if (number >= 1048576) {
+                return `${(number / 1048576).toFixed(1)} MB`;
+            }
+        }
+    </script>
 @endsection

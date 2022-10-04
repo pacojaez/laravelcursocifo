@@ -11,7 +11,6 @@ class WelcomeController
     * fallback route in web.php
     */
     public function index(){
-
         return view( 'welcome' );
     }
 

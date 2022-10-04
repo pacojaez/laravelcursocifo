@@ -14,14 +14,9 @@ class BikePhotoUploadService
      */
     public static function store(Request $request)
     {
-        // dd($request->get('file'));
-        if($file = $request->hasFile('image')) {
-
-            $file = $request->file('image') ;
-            $fileName = date('is').$file->getClientOriginalName();
-            $destinationPath = public_path().'/img/bikes' ;
-            $file->move($destinationPath,$fileName);
-            return '/img/bikes/'.$fileName;
+        if( $request->hasFile('image')) {
+            $file = $request->file('image')->store('public/'.config('filesystems.bikesImageDir')) ;
+            return pathinfo( $file, PATHINFO_BASENAME );
     }
   }
 

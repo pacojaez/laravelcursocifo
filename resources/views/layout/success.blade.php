@@ -1,5 +1,5 @@
 @if(Session::has('success'))
-<div>
+<div class="flex flex-row justify-center">
     <div class="max-w-xs mb-3 ml-3 text-sm text-white bg-green-500 rounded-md shadow-lg" role="alert">
         <div class="flex p-4">
             {{ Session::get('success') }}

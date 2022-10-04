@@ -55,8 +55,8 @@ class BikeFactory extends Factory
             'matriculada' => $this->faker->randomElement([0, 1]),
             'user_id' => $this->faker->randomElement([25, 30,34,35, 40,10,20, 22, 11,14,18]),
             'uuid' => $this->faker->uuid(),
-            // 'image' => 'img/bikes/moto'.$this->faker->numberBetween(1,30).'.jpg'
-            'image' => 'img/bikes/moto.jpg'
+            'image' => 'moto'.$this->faker->numberBetween(1,30).'.jpg'
+            // 'image' => 'img/bikes/moto.jpg'
         ];
     }
 }

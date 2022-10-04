@@ -18,7 +18,7 @@
             <div class="mt-2 card-header" >
                 <a href="{{ route( 'bike.show', [ 'bike' => $bike ])}}" blur-shadow-image="true">
                     <img class="rounded-lg"
-                        src="{{ asset( $bike->image )}}"
+                        src="{{ asset('storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}"
                         alt="{{ $bike->marca}} {{ $bike->modelo }}" />
                 </a>
             </div>
