@@ -7,7 +7,8 @@ use App\Models\Bike;
 use App\Services\BikePhotoUploadService;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Cookie;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BikeController
 {
@@ -171,28 +172,29 @@ class BikeController
         return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'marca'=> $marca, 'modelo' => $modelo]);
     }
 
-    // metodo para borrar las fotos que se quedan colgadas en el sistema de archivos y no estan voonculadas a ninguna moto en la DB
+    // metodo para borrar las fotos que se quedan colgadas en el sistema de archivos y no estan vinculadas a ninguna moto en la DB
 
     public function cleanBikeDirectory(){
-        $filesName = \File::files(base_path().'\public\img\bikes\\');
-        // dd($filesName);
+        // $filesName = \File::files(base_path().'\public\img\bikes\\');
+        $files = Storage::files(public_path().'/img/bikes/');
+        dd($files);
         $arr = [];
-        foreach ($filesName as $file) {
+        foreach ($files as $file) {
+            // dd($file);
             $ex = explode("\\"  , $file);
-            if( $ex === '"noimage.png"' ) {
-                continue;
-            }
-
-            array_push($arr , $ex[count($ex) - 1]);
+            // array_push($arr , $ex[count($ex) - 1]);
             // comprobamos que la imagen no está en la DB
-            $imageBike = Bike::where('image', 'like', $ex )->first();
-            if( $imageBike){
+            $imageHasBike = Bike::where('image', 'like', "/img/bikes/.$ex[6]" )->first();
+            if( $imageHasBike === NULL ) {
                 continue;
             }else{
-                dd($ex);
+                // echo 'hello world';
+                // File::delete();
+                Storage::delete('/public/img/bikes/'.$ex[6]);
             }
-
         }
-        dd($arr);
+
+        return redirect()->back()
+        ->with('success', 'Limpieza del directorio de motos realizada correctamente');
     }
 }
