@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BikeController;
-use App\Http\Controllers\WelcomeController;
-use App\Http\Actions\DeleteUnusedImages;
 use App\Models\Bike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Route;
+use App\Http\Actions\DeleteUnusedImages;
+use App\Http\Controllers\BikeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\WelcomeController;
 
 
 
@@ -42,6 +43,9 @@ Route::get('/bike/show/{bike}', [BikeController::class, 'show'])->name('bike.sho
 // Route::get('/bike/{bike}/edit', [BikeController::class, 'edit'])->name('bike.edit');
 // Route::put('/bike/{bike}', [BikeController::class, 'update'])->name('bike.update');
 // Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'sendMail'])->name('email.contact');
 
 //****************** FIN GRUPO **********************************/
 

@@ -185,6 +185,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\ViewWelcomeProvider::class,
+        // App\View\Components\Base::class,
 
 
         /*

@@ -44,6 +44,12 @@
                     </a>
                 </li>
                 <li class="flex">
+                    <a class="nav-link" href="{{ route('contact') }}">
+                        <i class="mr-2 text-base material-icons opacity-60"></i>
+                        <span class="{{ $pagina == 'contact' ? 'underline font-bold' : '' }}">CONTACTO</span>
+                    </a>
+                </li>
+                <li class="flex">
                     <a class="nav-link" href="{{ route('testwelcome') }}">
                         <i class="mr-2 text-base material-icons opacity-60"></i>
                         <span class="{{ $pagina == 'testwelcome' ? 'underline font-bold' : '' }}">TEST</span>
