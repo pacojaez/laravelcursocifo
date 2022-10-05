@@ -6,7 +6,7 @@
     <x-hero-welcome />
     <!-- Parallax Background -->
     <article class="flex-col w-full h-[500px] bg-cover bg-fixed bg-center flex justify-center items-center"
-        style="background-image: url({{ asset( $bike->image )}});">
+        style="background-image: url(  {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}">
         <h1 class="p-2 m-2 mt-20 mb-10 text-5xl font-semibold text-white rounded-lg bg-gray-400/60">
             LARABIKES FOR ALL
         </h1>

@@ -6,7 +6,7 @@
             <div class="flex-shrink w-full max-w-full pb-1 lg:w-1/2 lg:pb-0 lg:pr-1">
                 <div class="relative overflow-hidden border rounded opacity-50 hover-img max-h-98 hover:opacity-100">
                     <a href="{{ route('bike.show', ['bike' => $bike ])}}">
-                        <img class="w-full h-auto max-w-full mx-auto" src="{{ asset($bike->image) }}" alt="Image description">
+                        <img class="w-full h-auto max-w-full mx-auto" src=" {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}">
                     </a>
                     <div class="absolute bottom-0 w-full px-5 pt-8 pb-5 bg-gradient-cover bg-purple-400/60">
                         <a href=" {{ route('bike.show', ['bike' => $bike ])}}">
@@ -28,7 +28,7 @@
                     <article class="flex-shrink w-full max-w-full sm:w-1/2 cursor-pointer">
                         <div class="relative overflow-hidden border rounded opacity-30 hover-img max-h-98 hover:opacity-100 max-h-48">
                             <a href=" {{ route('bike.show', ['bike' => $moto ])}}">
-                                <img class="w-full h-auto max-w-full mx-auto" src="{{ asset($moto->image) }}" alt="{{ $moto->marca }}">
+                                <img class="w-full h-auto max-w-full mx-auto" src=" {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}"">
                             </a>
                             <div class="absolute bottom-0 w-full px-4 pb-4 bg-purple-200/60 pt-7 bg-gradient-cover">
                                 <a href=" {{ route('bike.show', ['bike' => $moto ])}}">
