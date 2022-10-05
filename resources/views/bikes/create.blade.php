@@ -55,6 +55,13 @@
                 </div>
                 <div class="px-3 md:w-1/2">
                     <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
+                        for="matriculada">
+                        ¿MATRÍCULADA?
+                    </label>
+                    <input id="matriculada" name="matriculada" aria-describedby="matriculada" type="checkbox" value="1"
+                            {{ empty(old('matriculada')) ? "" : "checked" }}
+                                class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
+                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
                         for="grid-state">
                         MATRÍCULA
                     </label>
@@ -96,4 +103,11 @@
             </button>
         </div>
     </form>
+    <script>
+        matricula.disabled = !matriculada.checked;
+        matriculada.onchange = function(){
+            matricula.disabled = !matriculada.checked;
+
+        }
+    </script>
 @endsection
