@@ -125,9 +125,14 @@ class BikeController
             $bike->update();
         }
 
+        if($request->filled('eliminarImagen') && $bike->image ){
+            Storage::delete( 'public/'.config('filesystems.bikesImageDir').'/'.$bike->image );
+            $bike->image = NULL;
+            $bike->update();
+        }
+
         $bike->update($request->only('marca', 'modelo', 'kms', 'caballos', 'color', 'matricula', 'precio'));
         //TO DO BORRAR FOTO ANTIGUA DEL SISTEMA DE ARCHIVOS
-
 
         return back()
                 ->with('success' , "Moto $bike->marca $bike->modelo actualizada correctamente")
@@ -146,13 +151,12 @@ class BikeController
         // if( !$request->hasValidSignature() )
         //     abort(403, 'No estas autorizado a borrar esa moto');
 
-
         //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
         URL::setKeyResolver( fn() => config('app.route_key'));
 
         if( $bike->delete() && $bike->image ){
-            // con esta linea desocmentada se borrará del sistenma de archivos
-            // pero como usamos SoftDeletes podemos volver a querer usar la fotro en el futuro por lo que
+            // con esta linea desocmentada se borrará del sistema de archivos
+            // pero como usamos SoftDeletes podemos volver a querer usar la foto en el futuro por lo que
             // esta linea se queda comentada
             // Storage::delete('public/'.config('filesystems.bikesImageDir').'/'.$bike->image );
         }

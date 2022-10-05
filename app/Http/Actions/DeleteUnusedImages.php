@@ -12,7 +12,7 @@ class DeleteUnusedImages extends Controller {
 
     public function cleanBikeDirectory(){
 
-        dd(storage_path(config('filesystems.bikesImageDir')));
+
         $files = Storage::files('public/'.config('filesystems.bikesImageDir'));
 
         $total = 0;
@@ -23,7 +23,8 @@ class DeleteUnusedImages extends Controller {
             if( $imageHasBike ) {
                 continue;
             }else{
-                Storage::delete(public_path('storage').config('filesystems.bikesImageDir').'/'.$ex[3] );
+                // dd($ex);
+                Storage::delete('public/'.config('filesystems.bikesImageDir').'/'.$ex[3] );
                 // Storage::delete('public/'.config('filesystems.bikesImageDir').'/'.$ex[3] );
                 $total++;
             }

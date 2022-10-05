@@ -19,8 +19,7 @@
                 <div class="mx-4 -mt-6 card-header">
                     <a href="{{ route('bike.show', $bike->id) }}" blur-shadow-image="true">
                         <img class="w-auto rounded-lg hover:animate-pulse"
-                        src="
-                        @if( $bike->image != NULL )
+                        src="@if( $bike->image != NULL )
                             {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}
                             @else
                             {{asset('img/components/noimage.png')}}

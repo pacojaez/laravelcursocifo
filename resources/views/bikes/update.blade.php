@@ -75,11 +75,21 @@
                 <div class="px-3 md:w-1/2">
                     <h2>IMAGEN GUARDADA </h2>
                     <img
-                        src="
-                            @if ($bike->image != null) {{ asset( 'storage/'.config('filesystems.bikesImageDir') . '/' . $bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}
+                        src="@if ($bike->image != null) {{ asset('storage/' . config('filesystems.bikesImageDir') . '/' . $bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}
                             @else
                             {{ asset('img/components/noimage.png') }} @endif
                             ">
+
+                    <div class="flex items-start mb-6">
+                        <div class="flex items-center h-5">
+                            <input id="eliminarImagen" name="eliminarImagen" aria-describedby="eliminarImagen" type="checkbox"
+                                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded">
+                        </div>
+                        <div class="text-sm ml-3">
+                            <label for="eliminarImagen" class="font-medium text-gray-900">ELIMINAR IMAGEN</label>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="px-3 md:w-1/2">
                     <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-state">
@@ -117,9 +127,10 @@
         </a>
     </div>
     <script>
+
         const input = document.getElementById('inputFile');
         const preview = document.querySelector('.preview');
-        input.style.opacity = 100;
+        input.style.opacity = 80;
 
         input.addEventListener('change', updateImageDisplay);
 
@@ -182,6 +193,18 @@
             } else if (number >= 1048576) {
                 return `${(number / 1048576).toFixed(1)} MB`;
             }
+        }
+
+         // deshabilitar el boton de subida de ficheros:
+         eliminarImagen.onchange = function (){
+            const preview = document.querySelector('.preview');
+            input.disabled = this.checked;
+            if( this.checked ){
+                preview.classList.add("hidden")
+            }else{
+                preview.classList.remove("hidden")
+            }
+
         }
     </script>
 @endsection
