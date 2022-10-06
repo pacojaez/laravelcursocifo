@@ -57,6 +57,13 @@
                         id="color" type="text" placeholder="Color" name="color" value="{{ $bike->color }}">
                 </div>
                 <div class="px-3 md:w-1/2">
+                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
+                        for="matriculada">
+                        ¿MATRÍCULADA?
+                    </label>
+                    <input id="matriculada" name="matriculada" aria-describedby="matriculada" type="checkbox" value="1"
+                            {{ empty(old('matriculada')) ? "" : "checked" }}
+                                class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
                     <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-state">
                         MATRÍCULA
                     </label>
@@ -83,9 +90,9 @@
                     <div class="flex items-start mb-6">
                         <div class="flex items-center h-5">
                             <input id="eliminarImagen" name="eliminarImagen" aria-describedby="eliminarImagen" type="checkbox"
-                                class="bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded">
+                                class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
                         </div>
-                        <div class="text-sm ml-3">
+                        <div class="ml-3 text-sm">
                             <label for="eliminarImagen" class="font-medium text-gray-900">ELIMINAR IMAGEN</label>
                         </div>
                     </div>
@@ -127,6 +134,10 @@
         </a>
     </div>
     <script>
+        matricula.disabled = !matriculada.checked;
+        matriculada.onchange = function(){
+            matricula.disabled = !matriculada.checked;
+        }
 
         const input = document.getElementById('inputFile');
         const preview = document.querySelector('.preview');

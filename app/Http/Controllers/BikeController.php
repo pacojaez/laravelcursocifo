@@ -103,20 +103,23 @@ class BikeController
         return view('bikes.update', ['bike'=>$bike]);
     }
 
-    public function update(Request $request, int $id)
+    public function update(Request $request, Bike $bike)
     {
+
         $request->validate([
             'marca' =>'required|max:255',
             'modelo' =>'required|max:255',
             'kms' =>'required|integer',
             'caballos' =>'required|max:255',
             'color' =>'required|max:255',
-            'matricula' =>'max:255',
+            'matriculada' =>'required_with:matricula',
+            'matricula' =>"required_if:matriculada, 1|
+                            nullable|
+                            regex:/^\d{4}[B-Z]{3}$/i|
+                            unique:bikes,matricula, $bike->id",
             'precio' =>'required|numeric',
-            'image' => 'image'
+            'image' => 'sometimes|file|image|mimes:jpg,gif,png,webp|max:2048'
         ]);
-
-        $bike = Bike::findOrFail($id);
 
         if($request->exists('image')){
             $savePhoto = BikePhotoUploadService::store($request);

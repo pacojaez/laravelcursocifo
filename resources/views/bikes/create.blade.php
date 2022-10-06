@@ -113,8 +113,8 @@
         matricula.disabled = !matriculada.checked;
         matriculada.onchange = function(){
             matricula.disabled = !matriculada.checked;
-
         }
+
         const input = document.getElementById('inputFile');
         const preview = document.querySelector('.preview');
         input.style.opacity = 80;

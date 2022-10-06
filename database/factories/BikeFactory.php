@@ -32,7 +32,6 @@ class BikeFactory extends Factory
                 'Gas Gas',
                 'Aprilia',
                 'BMW'
-
             ]),
             'modelo' => $this->faker->randomElement([
                     'GPZ1000RX',
@@ -50,10 +49,10 @@ class BikeFactory extends Factory
             'precio' => $this->faker->numberBetween([2000,30000]),
             'color' => $this->faker->randomElement(['blanco', 'rojo', 'negro','gris', 'azul']),
             'caballos' => $this->faker->randomElement([80, 200, 150]),
-            'matricula' => $this->faker->randomElement(['UNAMATRICULA', 'DOSMATRICULAS', 'TRESMATRICULAS']),
+            'matricula' => $this->faker->randomElement(['1122GHG', '2233GHG', '3344GGF', '4455HJH', '5566GHG', '6677JKJ', '7788FGF', '8899FGF', '9900FDF', '0011LKL']),
             'anyo' => $this->faker->date(),
             'matriculada' => $this->faker->randomElement([0, 1]),
-            'user_id' => $this->faker->randomElement([25, 30,34,35, 40,10,20, 22, 11,14,18]),
+            'user_id' => $this->faker->randomElement([ 25, 30, 34, 35, 40, 10, 20, 22, 11, 14, 18]),
             'uuid' => $this->faker->uuid(),
             'image' => 'moto'.$this->faker->numberBetween(1,30).'.jpg'
             // 'image' => 'img/bikes/moto.jpg'

@@ -97,6 +97,10 @@ Route::get('/generararchivoroutestest', function(){
     return view('generararchivoroutestest');
 })->name('generararchivoroutestest');
 
+Route::get('/validation', function(){
+    return view('validation');
+})->name('validation');
+
 //****************** FIN GRUPO **********************************/
 /**
  * FALLBACK ROUTE
