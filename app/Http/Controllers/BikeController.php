@@ -67,7 +67,7 @@ class BikeController
             $bike = Bike::create( $datos );
         }else{
             $datos = $request->except('image');
-            $datos += ['image' => 'noimage.png'];
+            $datos += ['image' => NULL ];
             if( $request->input('matricula')){
                 $datos += ['matriculada' => TRUE];
             }

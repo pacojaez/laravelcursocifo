@@ -9,11 +9,11 @@
                 background-size: cover;
                 :before:background-color: rgba(0,0,0,0.8);">
         <div class="m-5 border shadow card">
-            <div class="mx-4 -mt-6 card-header">
-                <img class="w-4/5 rounded-lg hover:animate-pulse"
+            <div class="flex flex-row justify-center mx-4 -mt-6 card-header">
+                <img class="w-full rounded-lg hover:animate-pulse"
                     src="
-                        @if( $bike->image != NULL )
-                            {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}
+                        @if( $bike->image !== null )
+                            {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}
                         @else
                             {{asset('img/components/noimage.png')}}
                         @endif

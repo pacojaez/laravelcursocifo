@@ -7,7 +7,15 @@
 
     @if ($total >= 1)
         <div class="flex flex-row justify-center">
-            <p>Hay {{ $total }} Motos</p>
+            <p>
+                Hay {{ $total }} Motos
+                @isset($marca)
+                    de la marca <span class="font-bold underline ">{{ $marca }}</span>
+                @endisset
+                @isset($modelo)
+                    y el modelo <span class="font-bold underline ">{{ $modelo }}</span>
+                @endisset
+            </p>
         </div>
     @endif
 
@@ -19,10 +27,11 @@
                 <div class="mx-4 -mt-6 card-header">
                     <a href="{{ route('bike.show', $bike->id) }}" blur-shadow-image="true">
                         <img class="w-auto rounded-lg hover:animate-pulse"
-                        src="@if( $bike->image != NULL )
-                            {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}
+                        src="
+                            @if( $bike->image != null )
+                            {{ asset( 'storage/'.config('filesystems.bikesImageDir').'/'.$bike->image) }}
                             @else
-                            {{asset('img/components/noimage.png')}}
+                            {{ asset('img/components/noimage.png')}}
                             @endif
                         "
                         alt="{{ $bike->marca . '-' . $bike->modelo }}" />

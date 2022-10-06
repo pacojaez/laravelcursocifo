@@ -82,9 +82,11 @@
                 <div class="px-3 md:w-1/2">
                     <h2>IMAGEN GUARDADA </h2>
                     <img
-                        src="@if ($bike->image != null) {{ asset('storage/' . config('filesystems.bikesImageDir') . '/' . $bike->image) }}" alt="{{ $bike->marca }} {{ $bike->modelo }}
+                        src="@if ($bike->image != null)
+                        {{ asset('storage/'.config('filesystems.bikesImageDir') . '/' . $bike->image) }}
                             @else
-                            {{ asset('img/components/noimage.png') }} @endif
+                            {{ asset('img/components/noimage.png') }}
+                            @endif
                             ">
 
                     <div class="flex items-start mb-6">
