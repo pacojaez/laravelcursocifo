@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Bike;
-use App\Services\BikePhotoUploadService;
+use Illuminate\Http\Request;
+use App\Http\Requests\BikeRequest;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
+use App\Services\BikePhotoUploadService;
 
 class BikeController
 {
@@ -37,23 +38,24 @@ class BikeController
         return view('bikes.create');
     }
 
-    public function store(Request $request)
+    public function store(BikeRequest $request)
     {
+        // MOVIDO A BIKEREQUEST
 
-        $request->validate([
-            'marca' =>'required|max:255',
-            'modelo' =>'required|max:255',
-            'kms' =>'required|integer',
-            'caballos' =>'required|max:255',
-            'color' =>'required|max:255',
-            'matriculada' =>'required_with:matricula',
-            'matricula' =>'required_if:matriculada, 1|
-                            nullable|
-                            regex:/^\d{4}[B-Z]{3}$/i|
-                            unique:bikes',
-            'precio' =>'required|numeric',
-            'image' => 'sometimes|file|image|mimes:jpg,gif,png,webp|max:2048'
-        ]);
+        // $request->validate([
+        //     'marca' =>'required|max:255',
+        //     'modelo' =>'required|max:255',
+        //     'kms' =>'required|integer',
+        //     'caballos' =>'required|max:255',
+        //     'color' =>'required|max:255',
+        //     'matriculada' =>'required_with:matricula',
+        //     'matricula' =>'required_if:matriculada, 1|
+        //                     nullable|
+        //                     regex:/^\d{4}[B-Z]{3}$/i|
+        //                     unique:bikes',
+        //     'precio' =>'required|numeric',
+        //     'image' => 'sometimes|file|image|mimes:jpg,gif,png,webp|max:2048'
+        // ]);
 
 
         if( $request->hasFile('image') ){

@@ -101,6 +101,10 @@ Route::get('/validation', function(){
     return view('validation');
 })->name('validation');
 
+Route::get('/formrequest', function(){
+    return view('formrequest');
+})->name('formrequest');
+
 //****************** FIN GRUPO **********************************/
 /**
  * FALLBACK ROUTE

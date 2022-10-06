@@ -43,8 +43,8 @@
             <a href="{{ route('validation')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
                 Validation
             </a>
-            <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
-                Responsive Design
+            <a href="{{ route('formrequest')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
+                Form Request
             </a>
             <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
                 Hover, Focus, & Other States

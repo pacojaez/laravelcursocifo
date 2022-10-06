@@ -1,9 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@extends('emails.base')
+@section('content')
+    <tr>
+        <td>
+            <h2>MENSAJE RECIBIDO</h2>
+            <p>De: {{ $mensaje->nombre}} {{ $mensaje->email }}</p>
+            <p> {{ $mensaje->mensaje}} </p>
+            <p>This is an example email. There are many like it but this one is mine.</p>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <p>
+                <a href="http://example.com" class="btn-primary">This is a Button</a>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        Mensaje enviado desde el {{ $concesionario }}
+        </td>
+    </tr>
+@endsection
+
+
+{{-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- The CSS stylesheet which will be inlined. -->
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/mail.css')}}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/mail.css')}}">
     @if($mensaje->asunto )
         <title>{{ $mensaje->asunto }}</title>
     @endif
@@ -35,4 +60,4 @@
         Mensaje enviado desde el {{ $concesionario }}
     </footer>
 </body>
-</html>
+</html> --}}
