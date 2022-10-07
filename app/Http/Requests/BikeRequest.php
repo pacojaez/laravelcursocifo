@@ -7,7 +7,14 @@ use Illuminate\Foundation\Http\FormRequest;
 class BikeRequest extends FormRequest
 {
     /**
-     * @return array<string, mixed>
+     * Indicates if the validator should stop on the first rule failure.
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = true;
+
+    /**
+    * @return array<string, mixed>
      */
     public function rules(): array
     {

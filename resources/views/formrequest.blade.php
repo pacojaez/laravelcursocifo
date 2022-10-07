@@ -130,6 +130,23 @@
             </p>
         </x-code>
     </div>
+    <div class="flex flex-col w-full bg-gray-100">
+        <div class="flex flex-col items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
+            <h2>
+                Indicando la propiedad protegida stopOnFirstFailure la validación parará en el primer error
+            </h2>
+        </div>
+        <x-code>
+            <p>
+                /**<br>
+                * Indicates if the validator should stop on the first rule failure.<br>
+                *<br>
+                * @var bool<br>
+                */<br>
+               protected $stopOnFirstFailure = true;<br>
+            </p>
+        </x-code>
+    </div>
 
 
 @endsection
