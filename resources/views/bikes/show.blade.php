@@ -46,6 +46,7 @@
             </div>
         </div>
     </div>
+    @if ( $bike->user() === auth()->user() )
     <div class="flex flex-row justify-center w-full p-2 m-2">
         <a href="{{ route('bike.edit', ['bike' => $bike]) }}" class="mx-4">
             <img class="p-2 rounded button bg-orange-500/100 hover:bg-orange-500/50"
@@ -56,4 +57,5 @@
                 width="50px"src="{{ asset('img/components/delete.png') }}" alt="show bike">
         </a>
     </div>
+    @endif
 @endsection

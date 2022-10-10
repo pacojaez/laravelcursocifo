@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use App\Services\BikePhotoUploadService;
+use Auth;
 
 class BikeController
 {
@@ -34,7 +35,9 @@ class BikeController
      */
     public function create()
     {
-        // dd('?hello');
+        if( !Auth::check() )
+            return view('errors.403');
+
         return view('bikes.create');
     }
 
@@ -57,6 +60,8 @@ class BikeController
         //     'image' => 'sometimes|file|image|mimes:jpg,gif,png,webp|max:2048'
         // ]);
 
+        if( !Auth::check() )
+            return view('errors.403');
 
         if( $request->hasFile('image') ){
             $savePhoto = BikePhotoUploadService::store($request);
@@ -66,6 +71,7 @@ class BikeController
             if( $request->input('matricula')){
                 $datos += ['matriculada' => TRUE];
             }
+            $datos += ['user_id' => Auth::id() ];
             $bike = Bike::create( $datos );
         }else{
             $datos = $request->except('image');
@@ -73,6 +79,8 @@ class BikeController
             if( $request->input('matricula')){
                 $datos += ['matriculada' => TRUE];
             }
+
+            $datos += ['user_id' => Auth::id() ];
             $bike = Bike::create( $datos );
         }
 
@@ -83,13 +91,14 @@ class BikeController
 
     public function show( Bike $bike)
     {
-// dd($bike);
         return view('bikes.show', ['bike'=>$bike]);
     }
 
     public function edit(Bike $bike )
     {
         // $bike = Bike::findOrFail($id);
+        if( Auth::id() != $bike->user_id )
+            return view('errors.403');
 
         return view('bikes.update', ['bike'=>$bike]);
     }
@@ -102,11 +111,17 @@ class BikeController
             return redirect()->route('bike.create');
 
         $bike = Bike::findOrFail( Cookie::get('lastInsertId'));
+
+        if( Auth::id() != $bike->user_id )
+            return redirect()->route('login');
+
         return view('bikes.update', ['bike'=>$bike]);
     }
 
     public function update(Request $request, Bike $bike)
     {
+        if( Auth::id() != $bike->user_id )
+            return view('errors.403');
 
         $request->validate([
             'marca' =>'required|max:255',
@@ -150,6 +165,9 @@ class BikeController
 
     public function delete( Bike $bike)
     {
+        if( Auth::id() != $bike->user_id )
+            return view('errors.403');
+
         return view('bikes.delete', ['bike'=>$bike]);
     }
 
@@ -159,6 +177,9 @@ class BikeController
         // si usamos el middleware 'signed' en la ruta ya no hace falta pasarle al controlador la request
         // if( !$request->hasValidSignature() )
         //     abort(403, 'No estas autorizado a borrar esa moto');
+
+        if( Auth::id() != $bike->user_id )
+            return view('errors.403');
 
         //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
         URL::setKeyResolver( fn() => config('app.route_key'));
@@ -198,6 +219,16 @@ class BikeController
                         ->appends(['marca'=> $marca, 'modelo' => $modelo ]);
 
         return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'marca'=> $marca, 'modelo' => $modelo]);
+    }
+
+    public function misMotos()
+    {
+
+        $bikes = Bike::where('user_id', 'LIKE', Auth::user()->id )->paginate(12);
+
+        $total = count($bikes);
+
+        return view('bikes.list', ['bikes' => $bikes, 'total' => $total]);
     }
 
 }

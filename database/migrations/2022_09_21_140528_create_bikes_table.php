@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('bikes', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('modelo', 255);
             $table->string('marca', 255);
             $table->integer('kms')->default(0);

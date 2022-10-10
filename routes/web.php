@@ -52,7 +52,7 @@ Route::post('/contact', [ContactController::class, 'sendMail'])->name('email.con
 //****************** GRUPO DE RUTAS PARA AÑADIR ->middleware('isAdmin) **********************************/
 Route::prefix('admin')->group( function(){
 
-    Route::get('/bike/create', [BikeController::class, 'create'])->name('bike.create');
+    Route::get('/bike/create', [BikeController::class, 'create'])->name('bike.create')->middleware('adult');
     Route::get('/bike/delete/{bike}', [BikeController::class, 'delete'])->name('bike.delete');
     Route::post('/bike', [BikeController::class, 'store'])->name('bike.store');
     Route::get('/bike/{bike}/edit', [BikeController::class, 'edit'])->name('bike.edit');
@@ -60,6 +60,7 @@ Route::prefix('admin')->group( function(){
     Route::put('/bike/{bike}', [BikeController::class, 'update'])->name('bike.update');
     Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy')->middleware('signed');
     Route::get('/bike/cleanBikeDirectory', [ DeleteUnusedImages::class, 'cleanBikeDirectory' ])->name('bike.cleanBikeDirectory');
+    Route::get('/mybikes', [BikeController::class, 'misMotos'])->name('bike.myBikes');
 
 });
 //****************** FIN GRUPO **********************************/
@@ -110,3 +111,5 @@ Route::get('/formrequest', function(){
  * FALLBACK ROUTE
  */
 Route::fallback([WelcomeController::class, 'index']);
+
+require __DIR__.'/auth.php';

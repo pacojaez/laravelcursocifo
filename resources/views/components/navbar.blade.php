@@ -25,34 +25,10 @@
                         <span class="{{ $pagina == 'bike.index' ? 'underline font-bold' : '' }}">NUESTRAS MOTOS</span>
                     </a>
                 </li>
-                <li>
-                    <a class="nav-link" href="{{ route('bike.create') }}">
-                        <i class="mr-2 text-base material-icons opacity-60">apps</i>
-                        <span class="{{ $pagina == 'bike.create' ? 'underline font-bold' : '' }}">CREAR MOTO</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="{{ route('bike.editLast') }}">
-                        <i class="mr-2 text-base material-icons opacity-60">apps</i>
-                        <span class="{{ $pagina == 'bike.editLast' ? 'underline font-bold' : '' }}">LAST UPDATED</span>
-                    </a>
-                </li>
-                <li class="flex">
-                    <a class="nav-link" href="{{ route('bike.cleanBikeDirectory') }}">
-                        <i class="mr-2 text-base material-icons opacity-60"></i>
-                        <span class="{{ $pagina == 'cleanBikeDirectory' ? 'underline font-bold' : '' }}">CLEAN BIKES DIR</span>
-                    </a>
-                </li>
                 <li class="flex">
                     <a class="nav-link" href="{{ route('contact') }}">
                         <i class="mr-2 text-base material-icons opacity-60"></i>
                         <span class="{{ $pagina == 'contact' ? 'underline font-bold' : '' }}">CONTACTO</span>
-                    </a>
-                </li>
-                <li class="flex">
-                    <a class="nav-link" href="{{ route('testwelcome') }}">
-                        <i class="mr-2 text-base material-icons opacity-60"></i>
-                        <span class="{{ $pagina == 'testwelcome' ? 'underline font-bold' : '' }}">TEST</span>
                     </a>
                 </li>
                 <li>
@@ -61,6 +37,63 @@
                         <span>Github</span>
                     </a>
                 </li>
+                @auth
+                    <li>
+                        <a class="nav-link" href="{{ route('bike.create') }}">
+                            <i class="mr-2 text-base material-icons opacity-60">apps</i>
+                            <span class="{{ $pagina == 'bike.create' ? 'underline font-bold' : '' }}">CREAR MOTO</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ route('bike.editLast') }}">
+                            <i class="mr-2 text-base material-icons opacity-60">apps</i>
+                            <span class="{{ $pagina == 'bike.editLast' ? 'underline font-bold' : '' }}">LAST UPDATED</span>
+                        </a>
+                    </li>
+                    <li class="flex">
+                        <a class="nav-link" href="{{ route('bike.cleanBikeDirectory') }}">
+                            <i class="mr-2 text-base material-icons opacity-60"></i>
+                            <span class="{{ $pagina == 'cleanBikeDirectory' ? 'underline font-bold' : '' }}">CLEAN BIKES
+                                DIR</span>
+                        </a>
+                    </li>
+                    <li class="flex">
+                        <a class="nav-link" href="{{ route('testwelcome') }}">
+                            <i class="mr-2 text-base material-icons opacity-60"></i>
+                            <span class="{{ $pagina == 'testwelcome' ? 'underline font-bold' : '' }}">TEST</span>
+                        </a>
+                    </li>
+                    <x-login-drop-down>
+                        <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
+                            <form class="nav-link" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="">LOGOUT</button>
+                            </form>
+                        </li>
+                        <li class="flex">
+                            <a class="nav-link" href="{{ route('bike.myBikes') }}">
+                                <i class="mr-2 text-base material-icons opacity-60"></i>
+                                <span class="{{ $pagina == 'login' ? 'underline font-bold' : '' }}">MIS MOTOS</span>
+                            </a>
+                        </li>
+                    </x-login-drop-down>
+
+                @else
+                <x-login-drop-down>
+                    <li class="flex">
+                        <a class="nav-link" href="{{ route('login') }}">
+                            <i class="mr-2 text-base material-icons opacity-60"></i>
+                            <span class="{{ $pagina == 'login' ? 'underline font-bold' : '' }}">LOGIN</span>
+                        </a>
+                    </li>
+                    <li class="flex">
+                        <a class="nav-link" href="{{ route('register') }}">
+                            <i class="mr-2 text-base material-icons opacity-60"></i>
+                            <span class="{{ $pagina == 'register' ? 'underline font-bold' : '' }}">REGISTRO</span>
+                        </a>
+                    </li>
+                </x-login-drop-down>
+                @endauth
             </ul>
         </div>
     </div>

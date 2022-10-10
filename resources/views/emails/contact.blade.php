@@ -5,13 +5,13 @@
             <h2>MENSAJE RECIBIDO</h2>
             <p>De: {{ $mensaje->nombre}} {{ $mensaje->email }}</p>
             <p> {{ $mensaje->mensaje}} </p>
-            <p>This is an example email. There are many like it but this one is mine.</p>
+            <p>TE ESPERAMOS EN LARABIKES</p>
         </td>
     </tr>
     <tr>
         <td align="center">
             <p>
-                <a href="http://example.com" class="btn-primary">This is a Button</a>
+                <a href="{{ route('login')}}" class="btn-primary">ENTRA A VER NUESTRAS OFERTAS</a>
             </p>
         </td>
     </tr>
