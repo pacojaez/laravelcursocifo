@@ -166,7 +166,10 @@ class BikeController
     public function delete( Bike $bike)
     {
         if( Auth::id() != $bike->user_id )
-            return view('errors.403');
+            return view('errors.403',
+            [
+                'mensaje' => "Estás intentando acceder a un recurso al que no tienes acceso"
+            ]);
 
         return view('bikes.delete', ['bike'=>$bike]);
     }
@@ -228,7 +231,9 @@ class BikeController
 
         $total = count($bikes);
 
-        return view('bikes.list', ['bikes' => $bikes, 'total' => $total]);
+        $miperfil = TRUE;
+
+        return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'miperfil' => $miperfil ]);
     }
 
 }

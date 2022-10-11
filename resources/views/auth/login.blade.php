@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('titulo', 'Creacion de una nueva moto de Larabikes')
+@section('titulo', 'Login en Larabikes')
 
 @section('contenido')
     <x-auth-card>

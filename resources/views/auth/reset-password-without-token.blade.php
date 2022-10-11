@@ -10,11 +10,11 @@
             </a>
         </x-slot>
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.update-no-token') }}">
             @csrf
 
-            <!-- Password Reset Token -->
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+            {{-- <!-- Password Reset Token -->
+            <input type="hidden" name="token" value="{{ $request->route('token') }}"> --}}
 
             <!-- Email Address -->
             <div>

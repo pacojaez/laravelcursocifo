@@ -19,6 +19,10 @@
         </div>
     @endif
 
+    @if ( isset($miperfil) )
+        <x-mi-perfil></x-mi-perfil>
+    @endif
+
     @if ($total >= 1)
         {{ $bikes->links() }}
         <div class="grid w-full grid-cols-1 gap-4 mt-16 mb-6 break-words shadow-lg rounded-xl md:grid-cols-4">

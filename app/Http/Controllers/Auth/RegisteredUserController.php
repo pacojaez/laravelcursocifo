@@ -37,18 +37,26 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'ciudad' => ['required', 'string', ],
+            'provincia' => ['required', 'string'],
+            'telefono' => ['required', 'numeric'],
+            'nacimiento' => ['required']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'ciudad' => $request->ciudad,
+            'provincia' => $request->provincia,
+            'telefono' => $request->telefono,
+            'nacimiento' => $request->nacimiento
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('bike.myBikes');
     }
 }

@@ -1,8 +1,11 @@
 @php($pagina = Route::currentRouteName())
 <nav class="w-full bg-gray-200 navbar ">
     <div class="px-0 container-lg">
-        <div class="flex items-center">
-            <a class="ml-0 mr-auto nav-brand" href="{{ url('/') }}">LARABIKES</a>
+        <div class="flex flex-row items-center">
+            <a class="ml-0 mr-auto nav-brand" href="{{ url('/') }}">
+                <img src="{{ asset('img/components/logolarabikes.png')}}" style="height:200px; width:200px" alt="logoLarabikes"/>
+            </a>
+            {{-- <p> LARABIKES</p> --}}
             <button navbar-trigger="" class="mb-0 ml-auto mr-0 navbar-trigger lg:hidden xl:hidden" type="button"
                 aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-trigger-icon">
@@ -67,32 +70,44 @@
                         <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
                             <form class="nav-link" action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="">LOGOUT</button>
+                                <button type="submit" class="">
+                                    <span class="{{ $pagina == 'password.reset' ? 'underline font-bold' : '' }}">
+                                        LOGOUT
+                                    </span>
+                                </button>
                             </form>
                         </li>
-                        <li class="flex">
+
+                        <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
+                            <a class="nav-link" href="{{ route('reset.password') }}">
+                                {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
+                                <span class="{{ $pagina == 'reset.password' ? 'underline font-bold' : '' }}">
+                                    RESET PASSWORD
+                                </span>
+                            </a>
+                        </li>
+                        <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
                             <a class="nav-link" href="{{ route('bike.myBikes') }}">
-                                <i class="mr-2 text-base material-icons opacity-60"></i>
-                                <span class="{{ $pagina == 'login' ? 'underline font-bold' : '' }}">MIS MOTOS</span>
+                                {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
+                                <span class="{{ $pagina == 'bike.myBikes' ? 'underline font-bold' : '' }}">MIS MOTOS</span>
                             </a>
                         </li>
                     </x-login-drop-down>
-
                 @else
-                <x-login-drop-down>
-                    <li class="flex">
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <i class="mr-2 text-base material-icons opacity-60"></i>
-                            <span class="{{ $pagina == 'login' ? 'underline font-bold' : '' }}">LOGIN</span>
-                        </a>
-                    </li>
-                    <li class="flex">
-                        <a class="nav-link" href="{{ route('register') }}">
-                            <i class="mr-2 text-base material-icons opacity-60"></i>
-                            <span class="{{ $pagina == 'register' ? 'underline font-bold' : '' }}">REGISTRO</span>
-                        </a>
-                    </li>
-                </x-login-drop-down>
+                    <x-login-drop-down>
+                        <li class="flex">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <i class="mr-2 text-base material-icons opacity-60"></i>
+                                <span class="{{ $pagina == 'login' ? 'underline font-bold' : '' }}">LOGIN</span>
+                            </a>
+                        </li>
+                        <li class="flex">
+                            <a class="nav-link" href="{{ route('register') }}">
+                                <i class="mr-2 text-base material-icons opacity-60"></i>
+                                <span class="{{ $pagina == 'register' ? 'underline font-bold' : '' }}">REGISTRO</span>
+                            </a>
+                        </li>
+                    </x-login-drop-down>
                 @endauth
             </ul>
         </div>

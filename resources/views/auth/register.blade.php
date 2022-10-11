@@ -54,6 +54,42 @@
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
 
+             <!-- CIUDAD -->
+             <div>
+                <x-input-label for="ciudad" :value="__('Ciudad')" />
+
+                <x-text-input id="ciudad" class="block w-full mt-1" type="text" name="ciudad" :value="old('ciudad')" required autofocus />
+
+                <x-input-error :messages="$errors->get('ciudad')" class="mt-2" />
+            </div>
+
+             <!-- Provincia -->
+             <div>
+                <x-input-label for="provincia" :value="__('Provincia')" />
+
+                <x-text-input id="provincia" class="block w-full mt-1" type="text" name="provincia" :value="old('provincia')" required autofocus />
+
+                <x-input-error :messages="$errors->get('provincia')" class="mt-2" />
+            </div>
+
+             <!-- Telefono -->
+             <div>
+                <x-input-label for="telefono" :value="__('Teléfono')" />
+
+                <x-text-input id="telefono" class="block w-full mt-1" type="text" name="telefono" :value="old('telefono')" required autofocus />
+
+                <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
+            </div>
+
+             <!-- Nacimiento -->
+             <div>
+                <x-input-label for="nacimiento" :value="__('Nacimiento')" />
+
+                <x-text-input id="nacimiento" class="block w-full mt-1" type="date" name="nacimiento" :value="old('nacimiento')" required autofocus />
+
+                <x-input-error :messages="$errors->get('nacimiento')" class="mt-2" />
+            </div>
+
             <div class="flex items-center justify-end mt-4">
                 <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}

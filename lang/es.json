@@ -119,5 +119,7 @@
     "uploaded": "Subir :attribute ha fallado.",
     "url": ":Attribute debe ser una URL válida.",
     "user": "No encontramos ningún usuario con ese correo electrónico.",
-    "uuid": "El campo :attribute debe ser un UUID válido."
+    "uuid": "El campo :attribute debe ser un UUID válido.",
+    "Already registered?": "¿Ya estás registrado?",
+    "Register": "Registro"
 }
