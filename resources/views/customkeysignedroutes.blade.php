@@ -65,6 +65,13 @@
         </div>
         <x-code>
             <p>
+                Illuminate\Support\Facades\URL::setKeyResolver<br>
+                    Set the encryption key resolver.<br>
+                    public static function setKeyResolver($keyResolver) { }<br>
+            </p>
+        </x-code>
+        <x-code>
+            <p>
                 $key = call_user_func($this->keyResolver);
             </p>
         </x-code>
