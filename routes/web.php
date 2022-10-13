@@ -106,6 +106,14 @@ Route::get('/formrequest', function(){
     return view('formrequest');
 })->name('formrequest');
 
+Route::get('/autorizacion', function(){
+    return view('autorizacion');
+})->name('autorizacion');
+
+Route::get('/artisancommands', function(){
+    return view('artisancommands');
+})->name('artisancommands');
+
 //****************** FIN GRUPO **********************************/
 /**
  * FALLBACK ROUTE

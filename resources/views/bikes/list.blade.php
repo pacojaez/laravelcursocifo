@@ -76,7 +76,12 @@
                                 <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
                                     width="40px"src="{{ asset('img/components/show.png') }}" alt="show bike">
                             </a>
-                            @if ( isset($bike->user->id) && $bike->user->id  == Auth::id() )
+                            {{-- @if ( isset($bike->user->id) && $bike->user->id  == Auth::id() ) --}}
+                            {{-- usando la dircetiva de blade can()--}}
+                            @cannot('update',$bike)
+                            <p class="text-xs font-bold">Las motos solo las pueden editar sus propietarios </p>
+                            @endcannot
+                            @can('update',$bike)
                                 <a href="{{ route('bike.edit', ['bike' => $bike]) }}">
                                     <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
                                         width="40px"src="{{ asset('img/components/edit.png') }}" alt="show bike">
@@ -85,7 +90,8 @@
                                     <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
                                         width="40px"src="{{ asset('img/components/delete.png') }}" alt="show bike">
                                 </a>
-                            @endif
+                            @endcan
+                            {{-- @endif --}}
 
                         </div>
 

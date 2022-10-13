@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use App\Services\BikePhotoUploadService;
 use Auth;
+use Gate;
 
 class BikeController
 {
@@ -94,10 +95,17 @@ class BikeController
         return view('bikes.show', ['bike'=>$bike]);
     }
 
-    public function edit(Bike $bike )
+    public function edit(Request $request, Bike $bike )
     {
-        // $bike = Bike::findOrFail($id);
-        if( Auth::id() != $bike->user_id )
+        // Método que solo comprueba si la moto pertenece al usuario:
+        // if( Auth::id() != $bike->user_id )
+        //     return view('errors.403');
+
+        //Autorización con Policies:
+        // if(Auth::user()->cant('update', $bike))
+        $user = $request->user();
+
+        if( $user->cant('update', $bike))
             return view('errors.403');
 
         return view('bikes.update', ['bike'=>$bike]);
@@ -112,16 +120,33 @@ class BikeController
 
         $bike = Bike::findOrFail( Cookie::get('lastInsertId'));
 
-        if( Auth::id() != $bike->user_id )
-            return redirect()->route('login');
+        //Autorización con Policies:
+        // if( Auth::id() != $bike->user_id )
+        //     return redirect()->route('login');
+
+        //Autorización con Policies:
+        if(Auth::user()->cant('update', $bike))
+            return view('errors.403');
+
 
         return view('bikes.update', ['bike'=>$bike]);
     }
 
     public function update(Request $request, Bike $bike)
     {
-        if( Auth::id() != $bike->user_id )
+        // logica que solo comprueba que el usuario y el user_id de la moto coinciden
+        // if( Auth::id() != $bike->user_id )
+        //     return view('errors.403');
+
+        //Autorización con Policies:
+        if(Auth::user()->cant('update', $bike))
             return view('errors.403');
+
+        //Autorizacion con Policies:
+        //NO FUNCIONA SACANDO EL USUARIO DE LA RELACIÓN DEL MODELO
+        // $user = $bike->user();
+        // if( $user->cant('update',$bike))
+        //             abort(401, 'No puedes editar esta moto');
 
         $request->validate([
             'marca' =>'required|max:255',
@@ -184,11 +209,19 @@ class BikeController
         if( Auth::id() != $bike->user_id )
             return view('errors.403');
 
+        //USANDO UNA GATE PARA IMPEDIR EL BORRADO DE MOTOS POR USUARIOS QUE NO PUEDEN ACCEDER AL RECURSO
+        // if(Gate::denies('borrarMoto', $bike))
+        //     abort(401, 'No puedes borrar un recurso que no es tuyo');
+
+        //Autorizacion con Policies:
+        if( $bike->user()->cant('delete',$bike))
+                    abort(401, 'No puedes editar esta moto');
+
         //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
         URL::setKeyResolver( fn() => config('app.route_key'));
 
         if( $bike->delete() && $bike->image ){
-            // con esta linea desocmentada se borrará del sistema de archivos
+            // con esta linea descomentada se borrará del sistema de archivos
             // pero como usamos SoftDeletes podemos volver a querer usar la foto en el futuro por lo que
             // esta linea se queda comentada
             // Storage::delete('public/'.config('filesystems.bikesImageDir').'/'.$bike->image );
