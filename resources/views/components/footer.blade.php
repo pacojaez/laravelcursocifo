@@ -1,5 +1,9 @@
 <!-- Footer -->
 <footer class="w-full pt-10 bg-gray-800 sm:mt-10">
+    <div class="flex flex-wrap justify-center max-w-6xl m-auto text-gray-200">
+        <p class="p-2 m-2 underline">PHP 8.0.13</p>
+        <p class="p-2 m-2 underline">Laravel Framework 9.34.0</p>
+    </div>
     <div class="flex flex-wrap max-w-6xl m-auto text-gray-800 justify-left">
         <!-- Col-1 -->
         <div class="w-1/2 p-5 sm:w-4/12 md:w-3/12">
@@ -94,7 +98,7 @@
             </a>
         </div>
 
-        <!-- Col-3 -->
+        <!-- Col-4 -->
         <div class="w-1/2 p-5 sm:w-4/12 md:w-3/12">
             <!-- Col Title -->
             <div class="mb-6 text-xs font-medium text-gray-400 uppercase">

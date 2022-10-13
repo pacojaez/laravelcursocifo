@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'LaraBikes') }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('img/components/favicon.png')}}">
+    <link rel="icon" type="image/png" href="{{ asset('img/components/favicon.png') }}">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
@@ -23,6 +23,11 @@
     {{-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" /> --}}
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!--DATA TABLES FOR USERS TABLE-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -63,20 +68,21 @@
     @includeWhen(Session::has('success'), 'layout.success')
     @includeWhen($errors->any(), 'layout.error')
     <main class="flex flex-col items-center justify-center mt-2">
-    <x-alert />
+        <x-alert />
 
         @yield('contenido')
 
     </main>
-        @include('components.footer')
+    @include('components.footer')
 
-        <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
-        <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/colored-shadow.js"></script>
-        <!-- from cdn -->
-        <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script>
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/colored-shadow.js"></script>
+    <!-- from cdn -->
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/collapse.js"></script>
 
     {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
         data-turbolinks-eval="false" data-turbo-eval="false"></script> --}}
     {{-- @stack('scripts') --}}
 </body>
+
 </html>

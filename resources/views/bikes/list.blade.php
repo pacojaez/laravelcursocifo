@@ -71,7 +71,7 @@
                                 DE: {{ $bike->user->name }}
                             </p>
                         @endif
-                        <div class="flex flex-row justify-center">
+                        <div class="flex flex-row justify-center align-middle">
                             <a href="{{ route('bike.show', ['bike' => $bike]) }}">
                                 <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
                                     width="40px"src="{{ asset('img/components/show.png') }}" alt="show bike">
@@ -79,7 +79,7 @@
                             {{-- @if ( isset($bike->user->id) && $bike->user->id  == Auth::id() ) --}}
                             {{-- usando la dircetiva de blade can()--}}
                             @cannot('update',$bike)
-                            <p class="text-xs font-bold">Las motos solo las pueden editar sus propietarios </p>
+                            <p class="self-center text-xs font-bold">Las motos solo las pueden editar sus propietarios </p>
                             @endcannot
                             @can('update',$bike)
                                 <a href="{{ route('bike.edit', ['bike' => $bike]) }}">

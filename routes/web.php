@@ -8,6 +8,7 @@ use App\Http\Actions\DeleteUnusedImages;
 use App\Http\Controllers\BikeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\UserController;
 
 
 
@@ -61,6 +62,8 @@ Route::prefix('admin')->group( function(){
     Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy')->middleware('signed');
     Route::get('/bike/cleanBikeDirectory', [ DeleteUnusedImages::class, 'cleanBikeDirectory' ])->name('bike.cleanBikeDirectory');
     Route::get('/mybikes', [BikeController::class, 'misMotos'])->name('bike.myBikes');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.list')->middleware('auth');
 
 });
 //****************** FIN GRUPO **********************************/

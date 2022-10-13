@@ -14,13 +14,13 @@
         <span class="p-2 m-2 my-20 font-bold text-center rounded-lg text-white/90 bg-gray-400/60">
             <a href="https://egoistdeveloper.github.io/twcss-to-sass-playground/" target="_blank"
                 class="text-white/90 hover:text-white">
-                Un recorrido por Laravel
+                Laravel Framework 9.34.0
             </a>
 
             <hr class="my-4" />
 
             <a href="https://unsplash.com/photos/8Pm_A-OHJGg" target="_blank" class="text-white/90 hover:text-white">
-                De Eloquent a Blade
+                PHP VERSION 8.0.13
             </a>
 
             <hr class="my-4" />

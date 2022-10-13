@@ -92,6 +92,14 @@
                                 <span class="{{ $pagina == 'bike.myBikes' ? 'underline font-bold' : '' }}">MIS MOTOS</span>
                             </a>
                         </li>
+                        @can('view', Auth::user() )
+                        <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
+                            <a class="nav-link" href="{{ route('users.list') }}">
+                                {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
+                                <span class="{{ $pagina == 'users.list' ? 'underline font-bold' : '' }}">USUARIOS</span>
+                            </a>
+                        </li>
+                        @endcan
                     </x-login-drop-down>
                 @else
                     <x-login-drop-down>
