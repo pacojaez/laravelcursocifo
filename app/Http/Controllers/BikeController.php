@@ -204,7 +204,7 @@ class BikeController
 
     public function destroy( Bike $bike )
     {
-        //METODO PARA COMPROBAR EN EL CONTROLADOR SI LA RUTA ESTÁ CORRCETAMENTE FIRMADA
+        // METODO PARA COMPROBAR EN EL CONTROLADOR SI LA RUTA ESTÁ CORRCETAMENTE FIRMADA
         // si usamos el middleware 'signed' en la ruta ya no hace falta pasarle al controlador la request
         // if( !$request->hasValidSignature() )
         //     abort(403, 'No estas autorizado a borrar esa moto');

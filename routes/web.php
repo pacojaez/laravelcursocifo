@@ -117,9 +117,9 @@ Route::get('/artisancommands', function(){
     return view('artisancommands');
 })->name('artisancommands');
 
-Route::get('/eloquent', function(){
-    return view('eloquent');
-})->name('eloquent');
+Route::get('/querybuilder', function(){
+    return view('querybuilder');
+})->name('querybuilder');
 
 //****************** FIN GRUPO **********************************/
 /**
