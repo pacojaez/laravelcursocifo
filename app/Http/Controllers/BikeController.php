@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Gate;
 use App\Models\Bike;
 use Illuminate\Http\Request;
 use App\Http\Requests\BikeRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use App\Services\BikePhotoUploadService;
-use Auth;
-use Gate;
 
 class BikeController
 {
@@ -92,6 +93,8 @@ class BikeController
 
     public function show( Bike $bike)
     {
+        DB::table('bikes')->increment('visitas', 1);
+
         return view('bikes.show', ['bike'=>$bike]);
     }
 

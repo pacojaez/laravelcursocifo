@@ -28,7 +28,8 @@ class Bike extends Model
         'matriculada',
         'deleted_at',
         'user_id',
-        'image'
+        'image',
+        'visitas'
     ];
 
 

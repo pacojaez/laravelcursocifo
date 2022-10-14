@@ -52,22 +52,22 @@
                         <h4 class="text-4xl font-bold">{{ $bike->marca }}</h4>
                         <h4 class="text-2xl font-semibold">{{ $bike->modelo }}</h4>
 
-                        <p class="mb-1 text-xl opcacity-60">
+                        <p class="mb-1 text-xl opacity-60">
                             Kms: {{ $bike->kms }}
                         </p>
                         @if ($bike->matriculada)
-                            <p class="mb-1 text-xl opcacity-60">
+                            <p class="mb-1 text-xl opacity-60">
                                 Matricula: {{ $bike->matricula }}
                             </p>
                         @endif
-                        <p class="mb-1 text-xl opcacity-60">
+                        <p class="mb-1 text-xl opacity-60">
                             Potencia: {{ $bike->caballos }} C.C.
                         </p>
-                        <p class="mb-1 text-xl opcacity-60">
+                        <p class="mb-1 text-xl opacity-60">
                             Kms: {{ $bike->kms }}
                         </p>
                         @if (isset($bike->user->name))
-                            <p class="mb-1 text-xl opcacity-60">
+                            <p class="mb-1 text-xl opacity-60">
                                 DE: {{ $bike->user->name }}
                             </p>
                         @endif
@@ -92,7 +92,9 @@
                                 </a>
                             @endcan
                             {{-- @endif --}}
-
+                            <p class="mb-1 text-xl opacity-60">
+                                Visitas: {{ $bike->visitas }}
+                            </p>
                         </div>
 
                     </div>
