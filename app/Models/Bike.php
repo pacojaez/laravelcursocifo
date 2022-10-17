@@ -29,7 +29,8 @@ class Bike extends Model
         'deleted_at',
         'user_id',
         'image',
-        'visitas'
+        'visitas',
+        'concesionario_id'
     ];
 
 
@@ -39,5 +40,10 @@ class Bike extends Model
     public function user(){
 
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function concesionario(){
+
+        return $this->belongsTo(Concesionario::class, 'concesionario_id');
     }
 }

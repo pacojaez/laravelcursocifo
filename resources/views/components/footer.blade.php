@@ -59,8 +59,8 @@
             <a href="{{ route('querybuilder')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
                 Query Builder
             </a>
-            <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
-                Extracting Components
+            <a href="{{ route('eloquent')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
+                Eloquent
             </a>
             <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
                 Adding New Utilities

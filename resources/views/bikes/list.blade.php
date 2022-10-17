@@ -3,7 +3,6 @@
 @section('titulo', 'Todas las motos de Larabikes')
 
 @section('contenido')
-    {{-- formulario de busqueda --}}
 
     @if ($total >= 1)
         <div class="flex flex-row justify-center">
@@ -19,7 +18,7 @@
         </div>
     @endif
 
-    @if ( isset($miperfil) )
+    @if (isset($miperfil))
         <x-mi-perfil></x-mi-perfil>
     @endif
 
@@ -71,17 +70,33 @@
                                 DE: {{ $bike->user->name }}
                             </p>
                         @endif
+                        @if (isset($bike->concesionario->name))
+                            <div class="p-2 m-2 border shadow card">
+                                <p class="mb-1 text-xl font-bold opacity-80">
+                                    CONCESIONARIO: {{ $bike->concesionario->name }}
+                                </p>
+                                <p class="mb-1 text-large opacity-60">
+                                    {{ $bike->concesionario->adress }}
+                                </p>
+                                <p class="mb-1 text-large opacity-60">
+                                    {{ $bike->concesionario->city }}
+                                </p>
+                                <p class="mb-1 text-large opacity-60">
+                                    {{ $bike->concesionario->state }}
+                                </p>
+                            </div>
+                        @endif
                         <div class="flex flex-row justify-center align-middle">
                             <a href="{{ route('bike.show', ['bike' => $bike]) }}">
                                 <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
                                     width="40px"src="{{ asset('img/components/show.png') }}" alt="show bike">
                             </a>
-                            {{-- @if ( isset($bike->user->id) && $bike->user->id  == Auth::id() ) --}}
-                            {{-- usando la dircetiva de blade can()--}}
-                            @cannot('update',$bike)
-                            <p class="self-center text-xs font-bold">Las motos solo las pueden editar sus propietarios </p>
+                            {{-- @if (isset($bike->user->id) && $bike->user->id == Auth::id()) --}}
+                            {{-- usando la dircetiva de blade can() --}}
+                            @cannot('update', $bike)
+                                <p class="self-center text-xs font-bold">Las motos solo las pueden editar sus propietarios </p>
                             @endcannot
-                            @can('update',$bike)
+                            @can('update', $bike)
                                 <a href="{{ route('bike.edit', ['bike' => $bike]) }}">
                                     <img class="p-2 m-2 rounded button bg-sky-500/100 hover:bg-sky-500/50"
                                         width="40px"src="{{ asset('img/components/edit.png') }}" alt="show bike">

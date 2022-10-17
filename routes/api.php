@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Bike;
+use App\Models\Concesionario;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,12 @@ Route::get('/marcasbikes', function(){
     // dd($json);
     return response($json)->header('Content-Type', 'application/json');
 })->name('marcasbikes');
+
+
+// ruta que nos da lOS CONCESIOANRIOS
+Route::get('/concesionarios', function(){
+    // dd( Bike::select('marca')->groupBy('marca')->get() );
+    $json = json_encode( Concesionario::select( 'name' )->get());
+    // dd($json);
+    return response($json)->header('Content-Type', 'application/json');
+})->name('concesionarios');

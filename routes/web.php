@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Http\Actions\DeleteUnusedImages;
 use App\Http\Controllers\BikeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ConcesionarioController;
 
 
 
@@ -62,7 +63,7 @@ Route::prefix('admin')->group( function(){
     Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy')->middleware('signed');
     Route::get('/bike/cleanBikeDirectory', [ DeleteUnusedImages::class, 'cleanBikeDirectory' ])->name('bike.cleanBikeDirectory');
     Route::get('/mybikes', [BikeController::class, 'misMotos'])->name('bike.myBikes');
-
+    Route::post('/concesionario', [ConcesionarioController::class, 'concesionarioBikes'])->name('concesionario.bikes');
     Route::get('/users', [UserController::class, 'index'])->name('users.list')->middleware('auth');
 
 });
@@ -120,6 +121,10 @@ Route::get('/artisancommands', function(){
 Route::get('/querybuilder', function(){
     return view('querybuilder');
 })->name('querybuilder');
+
+Route::get('/eloquent', function(){
+    return view('eloquent');
+})->name('eloquent');
 
 //****************** FIN GRUPO **********************************/
 /**

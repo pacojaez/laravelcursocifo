@@ -64,7 +64,10 @@
 
 <body class="overflow-x-hidden">
     @include('components.navbar')
+
     <x-marcas-list />
+    <x-concesionarios-list />
+
     @includeWhen(Session::has('success'), 'layout.success')
     @includeWhen($errors->any(), 'layout.error')
     <main class="flex flex-col items-center justify-center mt-2">

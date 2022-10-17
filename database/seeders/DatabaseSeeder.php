@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             'nacimiento' => '2000-03-25',
             'telefono' => '606566636'
             ]);
+        \App\Models\Concesionario::factory(4)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
