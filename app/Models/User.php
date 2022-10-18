@@ -53,4 +53,12 @@ class User extends Authenticatable
     public function bikes(){
         return $this->hasMany(Bike::class);
     }
+
+    /**
+     * RELATION WITH ROLES
+     *
+     */
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
 }

@@ -62,8 +62,8 @@
             <a href="{{ route('eloquent')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
                 Eloquent
             </a>
-            <a href="#" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
-                Adding New Utilities
+            <a href="{{ route('eloquentrelations')}}" class="block my-3 text-sm font-medium text-gray-300 duration-700 hover:text-gray-100">
+                Eloquent Relations
             </a>
         </div>
 

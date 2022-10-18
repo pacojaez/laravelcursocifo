@@ -5,12 +5,13 @@
 @section('contenido')
     <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
-            <h2>El ORM de Laravel</h2>
+            <h2>RELATIONS IN ELOQUENT</h2>
         </div>
         <x-code>
-            <a href="https://laravel.com/docs/9.x/eloquent" target="_blank" rel="noopener noreferrer">
+            <a href="https://laravel.com/docs/9.x/eloquent-relationships#main-content" target="_blank"
+                rel="noopener noreferrer">
                 <p>
-                    https://laravel.com/docs/9.x/eloquent
+                    https://laravel.com/docs/9.x/eloquent-relationships#main-content
                 </p>
             </a>
         </x-code>
@@ -18,43 +19,42 @@
 
     <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
-            <h2> CONVENCIONES </h2>
+            <h2> Relación 1 a N HasMany </h2>
         </div>
     </div>
     <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
-            <h2>Eloquent asume que la
-                tabla correspondiente de la base de datos tendrá el mismo
-                nombre, comenzando por minúscula y en plural.
-            </h2>
-        </div>
-        <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
-            <h2>Si queremos dar otro nombre diferente a la tabla en la base de
-                datos, debemos especificar la propiedad $table en nuestro modelo.
+            <h2>
+                relaciona dos entidades en una relación 1 a N
             </h2>
         </div>
         <x-code>
             <p>
-                protected $table = ‘tiendas’;
+                /**<br>
+                * RELACIONES<br>
+                */<br>
+                public function bikes(){<br>
+                <br>
+                return $this->hasMany(Bike::class);<br>
+                }<br>
             </p>
         </x-code>
     </div>
     <div class="flex flex-col w-full bg-gray-100">
         <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
             <h2>
-                Clave primaria
-            </h2>
-        </div>
-        <div class="flex items-center justify-center p-2 m-2 bg-gray-100 min-w-screen">
-            <h2>
-                todas las tablas tienen una clave primaria llamada ‘id’.
-                podemos indicar a Eloquent otra cosa colocando una
-                propiedad protegida, llamada $primaryKey
+                Relación 1 a N belongsTo
             </h2>
         </div>
         <x-code>
             <p>
-                protected $primaryKey = ‘codigo’;<br>
+                /**<br>
+                * RELACIONES<br>
+                */<br>
+                public function user(){<br>
+                <br>
+                return $this->belongsTo(User::class, 'user_id');<br>
+                }<br><br>
             </p>
         </x-code>
     </div>

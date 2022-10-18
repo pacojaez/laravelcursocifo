@@ -126,6 +126,10 @@ Route::get('/eloquent', function(){
     return view('eloquent');
 })->name('eloquent');
 
+Route::get('/eloquentrelations', function(){
+    return view('eloquentrelations');
+})->name('eloquentrelations');
+
 //****************** FIN GRUPO **********************************/
 /**
  * FALLBACK ROUTE
