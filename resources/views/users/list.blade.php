@@ -30,6 +30,9 @@
                                     <th class="p-8 text-xs text-gray-500">
                                         Nº de MOTOS
                                     </th>
+                                    <th class="p-8 text-xs text-gray-500">
+                                        ROLES
+                                    </th>
                                     <th class="px-6 py-2 text-xs text-gray-500">
                                         Edit
                                     </th>
@@ -60,8 +63,13 @@
                                         <td class="px-6 py-4 text-sm text-center text-gray-500">
                                             {{ $user->bikes_count }}
                                         </td>
+                                        <td class="px-6 py-4 text-sm text-center text-gray-500">
+                                            @foreach ( $user->roles as $role )
+                                                <p class="m-2 uppercase">{{ $role->role }}</p>
+                                            @endforeach
+                                        </td>
                                         <td class="px-6 py-4 text-center">
-                                            <a href="#"
+                                            <a href="{{ route('user.edit', [ 'user' => $user ])}}"
                                                 class="px-4 py-1 text-sm text-white bg-blue-400 rounded">Edit</a>
                                         </td>
                                         <td class="px-6 py-4 text-center">

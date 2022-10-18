@@ -25,9 +25,10 @@ class UserPolicy
         //
     }
 
-    public function update(User $user, User $model)
+    public function update(User $user )
     {
-        //
+        // El SUPERADMIN es el único con capcidad de ver listados de usuarios
+        return $user->email == 'admin@larabikes.com';
     }
 
     public function delete(User $user, User $model)
