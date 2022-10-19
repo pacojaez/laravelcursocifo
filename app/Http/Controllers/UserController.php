@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\Auth;
 
 class UserController
@@ -33,19 +35,24 @@ class UserController
                 return view('errors.403');
 
         $roles = Role::all();
-
-        $user = User::find( $request->user );
-
         $userRoles = $user->roles;
-        foreach( $userRoles as $userRole){
-            $collection = $roles->reject(function($element) use ( $userRole ) {
-                return  $element->role !== $userRole->role;
-            });
-        }
-dd($collection);
 
+        $notUserRoles = new Collection;
 
-        return view('users.edit', ['user'=>$user, 'roles' => $roles, 'userRoles' => $userRoles ]);
+		 foreach ($roles as $item)
+		 {
+		     if ( ! $userRoles->contains($item->getKey()))
+			 {
+			     $notUserRoles->add($item);
+			 }
+		 }
+
+        return view('users.edit', [
+            'user'=>$user,
+            'roles' => $roles,
+            'notUserRoles' => $notUserRoles,
+            'userRoles' => $userRoles
+        ]);
     }
 
     public function update(  User $user, Request $request )
@@ -78,5 +85,13 @@ dd($collection);
 
         return back()
                 ->with('success' , "Usuario  $user->name actualizado correctamente");
+    }
+
+    public function removeRole(  Request $request )
+    {
+        $role = Role::find($request['role']);
+        $request->user->roles->detach($role);
+
+        return redirect()->back();
     }
 }

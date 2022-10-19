@@ -70,6 +70,8 @@ Route::prefix('admin')->group( function(){
     Route::get('/user/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/edit/{user}', [UserController::class, 'update'])->name('user.update');
 
+    Route::post('/role/destroy/{role}', [UserController::class, 'removeRole'])->name('user.removeRole');
+
 });
 //****************** FIN GRUPO **********************************/
 

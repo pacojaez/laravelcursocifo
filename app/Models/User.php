@@ -59,6 +59,17 @@ class User extends Authenticatable
      *
      */
     public function roles(){
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+
+    /**
+     * Roles not asigned to user
+     *
+     * @param User $user
+     * @return void
+     */
+    public function notUserRoles( User $user){
+        return $this->belongsToMany(Role::class)
+                    ->wherePivotNotIn('user_id', [$user->id]);
     }
 }
