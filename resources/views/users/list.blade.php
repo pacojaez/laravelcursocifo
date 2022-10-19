@@ -33,12 +33,14 @@
                                     <th class="p-8 text-xs text-gray-500">
                                         ROLES
                                     </th>
+                                    @can('update', Auth::user())
                                     <th class="px-6 py-2 text-xs text-gray-500">
                                         Edit
                                     </th>
                                     <th class="px-6 py-2 text-xs text-gray-500">
                                         Delete
                                     </th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody class="bg-white">
@@ -68,14 +70,20 @@
                                                 <p class="m-2 uppercase">{{ $role->role }}</p>
                                             @endforeach
                                         </td>
+                                        @can('update', Auth::user())
                                         <td class="px-6 py-4 text-center">
                                             <a href="{{ route('user.edit', [ 'user' => $user ])}}"
-                                                class="px-4 py-1 text-sm text-white bg-blue-400 rounded">Edit</a>
+                                                class="px-4 py-1 text-sm text-white bg-blue-400 rounded">
+                                                Edit
+                                            </a>
                                         </td>
                                         <td class="px-6 py-4 text-center">
                                             <a href="#"
-                                                class="px-4 py-1 text-sm text-white bg-red-400 rounded">Delete</a>
+                                                class="px-4 py-1 text-sm text-white bg-red-400 rounded">
+                                                Delete
+                                            </a>
                                         </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>

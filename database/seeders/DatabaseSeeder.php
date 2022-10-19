@@ -42,11 +42,14 @@ class DatabaseSeeder extends Seeder
             $roles = Role::all();
             foreach( $users as $user){
                 foreach($roles as $role){
+                    if( $role->id === 1)
+                        continue;
                     if( rand(1,100) > 80)
                         $user->roles()->attach($role->id);
                 }
             }
-        \App\Models\Concesionario::factory(4)->create();
+
+        \App\Models\Concesionario::factory(5)->create();
 
 
 

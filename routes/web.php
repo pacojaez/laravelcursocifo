@@ -54,6 +54,9 @@ Route::post('/contact', [ContactController::class, 'sendMail'])->name('email.con
 //****************** GRUPO DE RUTAS PARA AÑADIR ->middleware('isAdmin) **********************************/
 Route::prefix('admin')->group( function(){
 
+    Route::get('/bikerestore/{id}', [BikeController::class, 'bikeRestore'])->name('restore.bike');
+    Route::delete('/bikepurge/{id}', [BikeController::class, 'purgeBike'])->name('purge.bike');
+
     Route::get('/bike/create', [BikeController::class, 'create'])->name('bike.create')->middleware('adult');
     Route::get('/bike/delete/{bike}', [BikeController::class, 'delete'])->name('bike.delete');
     Route::post('/bike', [BikeController::class, 'store'])->name('bike.store');
@@ -63,6 +66,8 @@ Route::prefix('admin')->group( function(){
     Route::delete('/bike/{bike}', [BikeController::class, 'destroy'])->name('bike.destroy')->middleware('signed');
     Route::get('/bike/cleanBikeDirectory', [ DeleteUnusedImages::class, 'cleanBikeDirectory' ])->name('bike.cleanBikeDirectory');
     Route::get('/mybikes', [BikeController::class, 'misMotos'])->name('bike.myBikes');
+    Route::get('/bike/userTrashed/{user}', [BikeController::class, 'userTrashedBikes'])->name('userTrashedBikes');
+
 
     Route::post('/concesionario', [ConcesionarioController::class, 'concesionarioBikes'])->name('concesionario.bikes');
 
@@ -70,7 +75,9 @@ Route::prefix('admin')->group( function(){
     Route::get('/user/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/edit/{user}', [UserController::class, 'update'])->name('user.update');
 
-    Route::post('/role/destroy/{role}', [UserController::class, 'removeRole'])->name('user.removeRole');
+
+
+    Route::get('/role/destroy/{roleid}/{userid}', [UserController::class, 'removeRole'])->name('user.removeRole');
 
 });
 //****************** FIN GRUPO **********************************/

@@ -218,8 +218,8 @@ class BikeController
         //     abort(401, 'No puedes borrar un recurso que no es tuyo');
 
         //Autorizacion con Policies:
-        if( $bike->user()->cant('delete',$bike))
-                    abort(401, 'No puedes editar esta moto');
+        if( $bike->user->cant('delete',$bike))
+                    abort(401, 'No puedes borrar esta moto');
 
         //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
         URL::setKeyResolver( fn() => config('app.route_key'));
@@ -271,6 +271,57 @@ class BikeController
         $miperfil = TRUE;
 
         return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'miperfil' => $miperfil ]);
+    }
+
+    /**
+     * Metodo para recuperar las motos borradas con SOFTDELETES
+     */
+
+     public function userTrashedBikes( ){
+
+        $bikes = Auth::user()->bikes()->onlyTrashed()->paginate(12);
+        $total = count($bikes);
+
+        return view('bikes.trashed', ['bikes' => $bikes , 'total' => $total ]);
+
+     }
+
+     /**
+      * RESTORE SOFDELETES
+      */
+    public function bikeRestore( int $id ){
+
+        $bike = Bike::withTrashed()->find($id);
+        $bike->restore();
+
+
+        $bikes = Bike::where('user_id', 'LIKE', Auth::user()->id )->paginate(12);
+
+        $total = count($bikes);
+
+        $miperfil = TRUE;
+
+        return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'miperfil' => $miperfil ])
+                ->with('success' , "Moto $bike->marca $bike->modelo restaurada en la base de datos correctamente");;
+    }
+
+
+    /**
+     * Elimina la moto definitivamente y la imagen asociada a dicha moto
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function purgeBike ( Request $request ){
+
+        $bike = Bike::withTrashed()->find( $request->input('bike_id'));
+
+        if( $bike->forceDelete() && $bike->image){
+            Storage::delete('public/'.config('filesystems.bikesImageDir').'/'.$bike->image );
+        }
+
+        return back()
+                ->with('success' , "Moto $bike->marca $bike->modelo borrada definitivamente");
     }
 
 }

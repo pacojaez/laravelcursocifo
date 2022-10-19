@@ -27,8 +27,8 @@ return new class extends Migration
             $table->boolean('matriculada')->default(false);
             $table->uuid('uuid')->nullable();
             $table->timestamps();
-            $table->time('deleted_at')->nullable()->default(NULL);
-            // $table->string('image')->nuullable()->default('noimage.png');
+            // $table->time('deleted_at')->nullable()->default(NULL);
+            $table->softDeletes();
         });
     }
 

@@ -20,7 +20,10 @@ class ConcesionarioController
 
          $total = count($bikes);
 
-         $bikes = Bike::with('user')->with('concesionario')->where( "concesionario_id", "LIKE", $concesionario->id )->paginate(12);
+         $bikes = Bike::with('user')
+            ->with('concesionario')
+            ->where( "concesionario_id", "LIKE", $concesionario->id )
+            ->paginate(12);
 
          return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'marca'=> '', 'modelo' => '']);
     }

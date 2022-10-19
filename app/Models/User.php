@@ -4,13 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -71,5 +72,28 @@ class User extends Authenticatable
     public function notUserRoles( User $user){
         return $this->belongsToMany(Role::class)
                     ->wherePivotNotIn('user_id', [$user->id]);
+    }
+
+    /**
+     * Method para comproobar si el usuario tiene un rol concreto dentro de un array
+     */
+    public function hasRoles( string|array $rolesNames ): bool
+    {
+        if(!is_array($rolesNames))
+            $rolesNames = [ $rolesNames];
+
+        foreach( $this->roles as $role){
+            if(in_array($role->role, $rolesNames) )
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * METODO PARA CONMPROBAR SI EL USUARIO ES PROPIETARIO DE LA MOTO
+     */
+    public function isOwner( Bike $bike ){
+        return $this->id == $bike->user_id;
     }
 }

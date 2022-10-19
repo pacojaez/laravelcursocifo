@@ -77,11 +77,15 @@ class UserController
             'ciudad' =>'required|max:255',
             'provincia' =>'required|max:255',
             'telefono' =>'required|max:255',
-            'roles' =>'required',
+            'roles' =>'max:255',
         ]);
-        $role = Role::find($request['roles']);
+
+        if(isset($request['roles'])){
+            $role = Role::find($request['roles']);
+            $user->roles()->save($role);
+        }
+
         $user->update($request->only('name', 'email', 'ciudad', 'provincia', 'telefono'));
-        $user->roles()->save($role);
 
         return back()
                 ->with('success' , "Usuario  $user->name actualizado correctamente");
@@ -89,9 +93,11 @@ class UserController
 
     public function removeRole(  Request $request )
     {
-        $role = Role::find($request['role']);
-        $request->user->roles->detach($role);
 
-        return redirect()->back();
+        $user = User::findOrFail(request('userid'));
+        $user->roles()->detach(request('roleid'));
+
+        return back()
+                ->with('success' , "Role del usuario  $user->name borrado correctamente");;
     }
 }

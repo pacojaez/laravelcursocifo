@@ -27,12 +27,16 @@ class BikePolicy
 
     public function update( User $user, Bike $bike )
     {
-        return $user->id == $bike->user_id || $user->email == 'admin@larabikes.com';
+        // return $user->id == $bike->user_id || $user->email == 'admin@larabikes.com';
+        return $user->isOwner($bike) ||
+                $user->hasRoles(['SUPERADMIN', 'ADMIN', 'SUPERVISOR']);
     }
 
     public function delete(User $user, Bike $bike)
     {
-        return $user->id == $bike->user_id || $user->email == 'admin@larabikes.com';
+        // || $user->email == 'admin@larabikes.com';
+        return $user->isOwner($bike) ||
+                $user->hasRoles(['SUPERADMIN', 'ADMIN']);
     }
 
     public function restore(User $user, Bike $bike)

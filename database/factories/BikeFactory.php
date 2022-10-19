@@ -56,7 +56,8 @@ class BikeFactory extends Factory
             'uuid' => $this->faker->uuid(),
             'image' => 'moto'.$this->faker->numberBetween(1,30).'.jpg',
             // 'image' => 'img/bikes/moto.jpg',
-            'visitas' => $this->faker->numberBetween(100, 1100)
+            'visitas' => $this->faker->numberBetween(100, 1100),
+            'concesionario_id' => $this->faker->numberBetween(1,4)
         ];
     }
 }

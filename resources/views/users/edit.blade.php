@@ -62,16 +62,16 @@
                             ROLES ACTUALES DEL USUARIO
                         </label>
                         @foreach ( $userRoles as $userRole )
-                        <div class="flex flex-row justify-between border rounded">
-                            {{-- <form action="{{ route('user.removeRole', ['role' => $userRole ] ) }}" method="post"> --}}
-                            @csrf
-                            <input type="hidden" name="role" value="{{ $userRole }}">
-                            <p class="block w-full px-4 py-3 appearance-none bg-grey-lighter text-grey-darker border-grey-lighter">
-                                {{ $userRole->role }}
-                            </p>
-                            <a href="{{ route('user.removeRole', ['role' => $userRole ] )}}" class="px-4 py-3 font-bold text-red-500">X</a>
-                            {{-- </form> --}}
-                        </div>
+                            <div class="flex flex-row justify-between border rounded">
+                                {{-- <form action="{{ route('user.removeRole', ['role' => $userRole ] ) }}" method="post"> --}}
+                                {{-- @csrf
+                                <input type="hidden" name="role" value="{{ $userRole }}"> --}}
+                                <p class="block w-full px-4 py-3 uppercase appearance-none bg-grey-lighter text-grey-darker border-grey-lighter">
+                                    {{ $userRole->role }}
+                                </p>
+                                <a href="{{ route('user.removeRole', ['roleid' => $userRole->id, 'userid' => $user->id ] )}}" class="px-4 py-3 font-bold text-red-500 uppercase">X</a>
+                                {{-- </form> --}}
+                            </div>
                         @endforeach
                     </div>
                     <div class="px-3 mb-6 md:w-1/2 md:mb-0">
@@ -79,8 +79,9 @@
                             AÑADIR ROL
                         </label>
                         <select name="roles" id="roles" >
+                            <option class="font-semibold text-gray-700 underline uppercase" disabled selected>SELECCIONA UN ROL</option>
                             @foreach ($notUserRoles as $role)
-                                <option class="font-semibold underline uppercase text-red" value="{{ $role->id }}">{{ $role->role }}</option>
+                                <option class="font-semibold text-gray-700 underline uppercase" value="{{ $role->id }}">{{ $role->role }}</option>
                             @endforeach
                         </select>
 

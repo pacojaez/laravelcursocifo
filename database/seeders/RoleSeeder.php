@@ -9,35 +9,35 @@ class RoleSeeder extends Seeder
     public function run()
     {
         \App\Models\Role::factory()->create([
-            'role' => 'SuperAdmin',
+            'role' => 'SUPERADMIN',
             'description' => 'Superpoderes'
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'admin',
+            'role' => 'ADMIN',
             'description' => 'Casi Superpoderes'
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'supervisor',
+            'role' => 'SUPERVISOR',
             'description' => 'Supervisa el trabajo de los demás'
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'invitado',
+            'role' => 'INVITADO',
             'description' => 'Ninguna opción de gestion'
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'capataz',
+            'role' => 'CAPATAZ',
             'description' => 'Capaz de casi todo'
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'coordinador',
+            'role' => 'COORDINADOR',
             'description' => 'Coordina las operaciones del personal'
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'gestor',
+            'role' => 'GESTOR',
             'description' => 'Encargado de gestionar dependencias'
         ]);
         \App\Models\Role::factory()->create([
-            'role' => 'responsable',
+            'role' => 'RESPONSABLE',
             'description' => 'Responsable de area'
         ]);
 
