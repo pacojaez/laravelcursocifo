@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 class UserController
 {
@@ -97,7 +98,81 @@ class UserController
         $user = User::findOrFail(request('userid'));
         $user->roles()->detach(request('roleid'));
 
-        return back()
-                ->with('success' , "Role del usuario  $user->name borrado correctamente");;
+        $users = User::with('roles')->orderBy('id', 'ASC')->withCount('bikes')->get();
+
+        return view('users.list', [
+            'users' => $users
+            ])
+            ->with('success' , "Role del usuario  $user->name borrado correctamente");;
     }
+
+    public function destroy( User $user )
+    {
+        // METODO PARA COMPROBAR EN EL CONTROLADOR SI LA RUTA ESTÁ CORRCETAMENTE FIRMADA
+        // si usamos el middleware 'signed' en la ruta ya no hace falta pasarle al controlador la request
+        // if( !$request->hasValidSignature() )
+        //     abort(403, 'No estas autorizado a borrar esa moto');
+
+        //Autorizacion con Policies:
+        if( !Auth::user()->can('delete', $user) )
+            return view('errors.403');
+
+        //USANDO UNA GATE PARA IMPEDIR EL BORRADO DE MOTOS POR USUARIOS QUE NO PUEDEN ACCEDER AL RECURSO
+        // if(Gate::denies('borrarMoto', $bike))
+        //     abort(401, 'No puedes borrar un recurso que no es tuyo');
+
+        //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
+        URL::setKeyResolver( fn() => config('app.route_key'));
+
+        $user->delete();
+
+        return redirect()->route('users.trashed')
+                ->with('success' , "Usuario $user->name con ID $user->id borrado correctamente");
+    }
+
+    public function trashed (){
+        $users = User::with('roles')->onlyTrashed()->orderBy('id', 'ASC')->withCount('bikes')->get();
+        // $user = User::first();
+        // foreach($user->roles as $role)
+        //     dd($role);
+
+        return view('users.list', [
+            'users' => $users
+        ]);
+    }
+
+    public function userRestore( int $id ){
+        $user = User::withTrashed()->find($id);
+        $user->restore();
+
+        $users = User::with('roles')->orderBy('id', 'ASC')->withCount('bikes')->get();
+        // $miperfil = TRUE;
+
+        return redirect()->route('users.list', ['users' => $users])
+                ->with('success' , "Usuario $user->name restaurado en la base de datos correctamente");
+    }
+
+    public function purgeUser( Request $request ){
+        $user = User::withTrashed()->find( $request->input('user_id'));
+
+            //TODO: ELIMINAR SUS MOTOS PERMANENTEMENTE
+            /**
+            *   $bikes = $user->bikes;
+            *
+            *   if($user->forceDelete()){
+            *       foreach($bikes as $bike){
+            *           if( $bike->forceDelete() && $bike->image){
+            *               Storage::delete('public/'.config('filesystems.bikesImageDir').'/'.$bike->image );
+            *           }
+            *       };
+            *    }
+            */
+
+        return back()
+                // ->with('success' , "Usuario $user->name y todas sus motos borradas definitivamente");
+                ->with('success' , "TODO: ELIMINAR SUS MOTOS Y LAS FOTOS DE SUS MOTOS PERMANENTEMENTE");
+
+
+    }
+
 }

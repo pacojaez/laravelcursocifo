@@ -3,6 +3,7 @@
 @section('titulo', 'Login en Larabikes')
 
 @section('contenido')
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
@@ -15,7 +16,6 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />

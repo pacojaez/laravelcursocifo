@@ -54,8 +54,6 @@ Route::post('/contact', [ContactController::class, 'sendMail'])->name('email.con
 //****************** GRUPO DE RUTAS PARA AÑADIR ->middleware('isAdmin) **********************************/
 Route::prefix('admin')->group( function(){
 
-    Route::get('/bikerestore/{id}', [BikeController::class, 'bikeRestore'])->name('restore.bike');
-    Route::delete('/bikepurge/{id}', [BikeController::class, 'purgeBike'])->name('purge.bike');
 
     Route::get('/bike/create', [BikeController::class, 'create'])->name('bike.create')->middleware('adult');
     Route::get('/bike/delete/{bike}', [BikeController::class, 'delete'])->name('bike.delete');
@@ -71,9 +69,13 @@ Route::prefix('admin')->group( function(){
 
     Route::post('/concesionario', [ConcesionarioController::class, 'concesionarioBikes'])->name('concesionario.bikes');
 
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
     Route::get('/users', [UserController::class, 'index'])->name('users.list')->middleware('auth');
+    Route::get('/trashedUsers', [UserController::class, 'trashed'])->name('users.trashed')->middleware('auth');
     Route::get('/user/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/edit/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/userRestore/{id}', [UserController::class, 'userRestore'])->name('user.restore');
+    Route::delete('/userpurge/{id}', [UserController::class, 'purgeUser'])->name('user.purge');
 
 
 

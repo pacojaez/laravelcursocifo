@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -35,7 +36,8 @@ class UserPolicy
 
     public function delete(User $user, User $model)
     {
-        return $user->hasRoles(['SUPERADMIN']);
+
+       return $user->hasRoles(['SUPERADMIN']);
     }
 
     public function restore(User $user, User $model)

@@ -1,6 +1,7 @@
 @php($pagina = Route::currentRouteName())
 <nav class="w-full bg-gray-200 navbar ">
     <div class="px-0 container-lg">
+
         <div class="flex flex-row items-center">
             <a class="ml-0 mr-auto nav-brand" href="{{ url('/') }}">
                 <img src="{{ asset('img/components/logolarabikes.png')}}" style="height:200px; width:200px" alt="logoLarabikes"/>
@@ -103,6 +104,12 @@
                             <a class="nav-link" href="{{ route('users.list') }}">
                                 {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
                                 <span class="{{ $pagina == 'users.list' ? 'underline font-bold' : '' }}">USUARIOS</span>
+                            </a>
+                        </li>
+                        <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
+                            <a class="nav-link" href="{{ route('users.trashed') }}">
+                                {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
+                                <span class="{{ $pagina == 'users.trashed' ? 'underline font-bold' : '' }}">USUARIOS DADOS DE BAJA</span>
                             </a>
                         </li>
                         @endcan
