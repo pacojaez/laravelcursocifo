@@ -38,7 +38,10 @@
                                     </th>
                                     @can('update', Auth::user())
                                         <th class="px-6 py-2 text-xs text-gray-500">
-                                            ACTIONS
+                                            EDITAR
+                                        </th>
+                                        <th class="p-8 text-xs text-gray-500">
+                                            ELIMINAR (CON SOFTDELETES)
                                         </th>
                                     @endcan
                                 </tr>
@@ -95,7 +98,8 @@
                                                         class="px-4 py-1 text-xs text-white bg-blue-400 rounded">
                                                         Edit
                                                     </a>
-
+                                                </td>
+                                                <td class="px-6 py-4 text-center">
                                                     <form class="" action="{{ route('user.destroy', ['user' => $user ]) }}"
                                                         method="POST">
                                                         @csrf

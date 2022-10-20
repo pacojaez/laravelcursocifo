@@ -26,7 +26,8 @@ class UserFactory extends Factory
             'ciudad' => fake()->city(),
             'provincia' => fake()->city(),
             'nacimiento' => fake()->date('Y-m-d'),
-            'telefono' => fake()->phoneNumber()
+            'telefono' => fake()->phoneNumber(),
+            'first_bike_created' => FALSE
 
         ];
     }

@@ -38,15 +38,16 @@ class UserController
         $roles = Role::all();
         $userRoles = $user->roles;
 
-        $notUserRoles = new Collection;
+        // $notUserRoles = new Collection;
 
-		 foreach ($roles as $item)
-		 {
-		     if ( ! $userRoles->contains($item->getKey()))
-			 {
-			     $notUserRoles->add($item);
-			 }
-		 }
+		//  foreach ($roles as $item)
+		//  {
+		//      if ( ! $userRoles->contains($item->getKey()))
+		// 	 {
+		// 	     $notUserRoles->add($item);
+		// 	 }
+		//  }
+        $notUserRoles = $user->remainingRoles();
 
         return view('users.edit', [
             'user'=>$user,

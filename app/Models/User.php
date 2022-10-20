@@ -25,7 +25,8 @@ class User extends Authenticatable
         'ciudad',
         'provincia',
         'telefono',
-        'nacimiento'
+        'nacimiento',
+        'first_bike_created'
     ];
 
     /**
@@ -75,7 +76,20 @@ class User extends Authenticatable
     }
 
     /**
-     * Method para comproobar si el usuario tiene un rol concreto dentro de un array
+     * Roles not asigned to user
+     *
+     * @param User $user
+     * @return void
+     */
+    public function remainingRoles( ){
+
+        $roles = Role::all();
+        $userRoles = $this->roles;
+        return $roles->diff($userRoles);
+    }
+
+    /**
+     * Method para comprobar si el usuario tiene un rol concreto dentro de un array
      */
     public function hasRoles( string|array $rolesNames ): bool
     {

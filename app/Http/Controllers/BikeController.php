@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FirstBikeCreated;
+use App\Events\MoreBikes;
+use App\Events\OneThousandVisits;
 use Auth;
 use Gate;
 use App\Models\Bike;
@@ -76,6 +79,13 @@ class BikeController
             }
             $datos += ['user_id' => Auth::id() ];
             $bike = Bike::create( $datos );
+
+            if( $request->user()->first_bike_created == 0  ){
+                FirstBikeCreated::dispatch( $bike, $request->user());
+                $request->user()->first_bike_created = 1;
+                $request->user()->save();
+            }
+
         }else{
             $datos = $request->except('image');
             $datos += ['image' => NULL ];
@@ -85,6 +95,12 @@ class BikeController
 
             $datos += ['user_id' => Auth::id() ];
             $bike = Bike::create( $datos );
+
+            if( $request->user()->first_bike_created == 0  ){
+                FirstBikeCreated::dispatch( $bike, $request->user());
+                $request->user()->first_bike_created = 1;
+                $request->user()->save();
+            }
         }
 
         return redirect()->route('bike.show', $bike)
@@ -95,6 +111,11 @@ class BikeController
     public function show( Bike $bike)
     {
         DB::table('bikes')->increment('visitas', 1);
+
+        // logica para mandar mail de felicitacion por tener mil visitas
+        if( $bike->visitas == 1000 ){
+            OneThousandVisits::dispatch(  $bike );
+        }
 
         return view('bikes.show', ['bike'=>$bike]);
     }
