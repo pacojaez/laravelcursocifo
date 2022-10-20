@@ -65,6 +65,9 @@ Route::prefix('admin')->group( function(){
     Route::get('/bike/cleanBikeDirectory', [ DeleteUnusedImages::class, 'cleanBikeDirectory' ])->name('bike.cleanBikeDirectory');
     Route::get('/mybikes', [BikeController::class, 'misMotos'])->name('bike.myBikes');
     Route::get('/bike/userTrashed/{user}', [BikeController::class, 'userTrashedBikes'])->name('userTrashedBikes');
+    Route::get('/bikeRestore/{id}', [BikeController::class, 'bikeRestore'])->name('bike.restore');
+    Route::delete('/bikepurge/{id}', [BikeController::class, 'purgeBike'])->name('bike.purge');
+
 
 
     Route::post('/concesionario', [ConcesionarioController::class, 'concesionarioBikes'])->name('concesionario.bikes');

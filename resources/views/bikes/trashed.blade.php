@@ -92,14 +92,14 @@
                             @endcannot
                             @can('update', $bike)
                                 <div class="flex justify-center mt-6">
-                                    <a href="{{ route('restore.bike', ['id' => $bike->id]) }}">
+                                    <a href="{{ route('bike.restore', ['id' => $bike->id]) }}">
                                         <p
                                             class="px-3 py-2 mt-6 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-green-500 rounded-md dark:bg-green-600 dark:hover:bg-green-700 dark:focus:bg-green-700 hover:bg-green-600 focus:outline-none focus:bg-green-500 focus:ring focus:ring-green-300 focus:ring-opacity-50">
                                             RESTAURAR MOTO
                                         </p>
                                     </a>
                                 </div>
-                                <form class="mt-2" action="{{ route('purge.bike', ['id' => $bike->id]) }}" method="POST">
+                                <form class="mt-2" action="{{ route('bike.purge', ['id' => $bike->id]) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="bike_id" value="{{ $bike->id }}">

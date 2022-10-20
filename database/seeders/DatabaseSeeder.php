@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\Bike::factory(200)->create();
 
-        \App\Models\User::factory(20)->create();
-
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@larabikes.com',
@@ -38,9 +36,16 @@ class DatabaseSeeder extends Seeder
                 RoleSeeder::class,
             ]);
 
+        \App\Models\User::factory(20)->create();
+
             $users = User::all();
             $roles = Role::all();
             foreach( $users as $user){
+                if( $user->id === 1){
+                    $user->roles()->attach(1);
+                    continue;
+                }
+
                 foreach($roles as $role){
                     if( $role->id === 1)
                         continue;
@@ -50,7 +55,6 @@ class DatabaseSeeder extends Seeder
             }
 
         \App\Models\Concesionario::factory(5)->create();
-
 
 
     }

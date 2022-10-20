@@ -126,8 +126,13 @@ class UserController
 
         $user->delete();
 
+        $bikes = $user->bikes;
+        foreach ($bikes as $bike){
+            $bike->delete();
+        }
+
         return redirect()->route('users.trashed')
-                ->with('success' , "Usuario $user->name con ID $user->id borrado correctamente");
+                ->with('success' , "Usuario $user->name con ID $user->id y sus motos borrados correctamente");
     }
 
     public function trashed (){

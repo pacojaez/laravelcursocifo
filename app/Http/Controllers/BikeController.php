@@ -194,7 +194,7 @@ class BikeController
 
     public function delete( Bike $bike)
     {
-        if( Auth::id() != $bike->user_id )
+        if( Auth::user()->cant('delete',$bike) )
             return view('errors.403',
             [
                 'mensaje' => "Estás intentando acceder a un recurso al que no tienes acceso"
@@ -210,15 +210,16 @@ class BikeController
         // if( !$request->hasValidSignature() )
         //     abort(403, 'No estas autorizado a borrar esa moto');
 
-        if( Auth::id() != $bike->user_id )
-            return view('errors.403');
+        // Metodo donde solo comprobamos si el id del propietario de la moto y el del auth user coinciden
+        //if( Auth::id() != $bike->user_id )
+        //    return view('errors.403');
 
         //USANDO UNA GATE PARA IMPEDIR EL BORRADO DE MOTOS POR USUARIOS QUE NO PUEDEN ACCEDER AL RECURSO
         // if(Gate::denies('borrarMoto', $bike))
         //     abort(401, 'No puedes borrar un recurso que no es tuyo');
 
         //Autorizacion con Policies:
-        if( $bike->user->cant('delete',$bike))
+        if( Auth::user()->cant('delete',$bike))
                     abort(401, 'No puedes borrar esta moto');
 
         //MODO DE TENER RUTAS FIRMADAS CON CLAVES QUE NO SEAN LA APP.KEY
@@ -279,11 +280,17 @@ class BikeController
 
      public function userTrashedBikes( ){
 
-        $bikes = Auth::user()->bikes()->onlyTrashed()->paginate(12);
-        $total = count($bikes);
+        if( Auth::user()->hasRoles(['SUPERADMIN'])){
+            $bikes = Bike::onlyTrashed()->paginate(12);
+            $total = count(Bike::onlyTrashed()->get());
+
+
+        }else{
+            $bikes = Auth::user()->bikes()->onlyTrashed()->paginate(12);
+            $total = count($bikes);
+        }
 
         return view('bikes.trashed', ['bikes' => $bikes , 'total' => $total ]);
-
      }
 
      /**
@@ -292,17 +299,40 @@ class BikeController
     public function bikeRestore( int $id ){
 
         $bike = Bike::withTrashed()->find($id);
+
+        if( $bike->user == NULL ){
+            $bikes = Bike::with('user')->with('concesionario')->orderBy('id', 'ASC')->paginate(12);
+            // $bikes = Bike::orderBy('id', 'ASC')->paginate(12);
+            $total = Bike::count();
+
+            // return view('bikes.list', ['bikes' => $bikes, 'total' => $total])
+                    return back()->withErrors( ['error' => "Estás intentando restaurar una moto cuyo propietario está dado de baja"] );
+        }
+
         $bike->restore();
 
 
-        $bikes = Bike::where('user_id', 'LIKE', Auth::user()->id )->paginate(12);
+        if( Auth::user()->hasRoles(['SUPERADMIN'])){
+            $bikes = Bike::with('user')->with('concesionario')->orderBy('id', 'ASC')->paginate(12);
+            // $bikes = Bike::orderBy('id', 'ASC')->paginate(12);
 
-        $total = count($bikes);
+            $total = Bike::count();
 
-        $miperfil = TRUE;
+            return view('bikes.list', ['bikes' => $bikes, 'total' => $total])
+                    ->with('success' , "Moto $bike->marca $bike->modelo restaurada en la base de datos correctamente");
 
-        return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'miperfil' => $miperfil ])
-                ->with('success' , "Moto $bike->marca $bike->modelo restaurada en la base de datos correctamente");;
+        }else{
+            $bikes = Bike::where('user_id', 'LIKE', Auth::user()->id )->paginate(12);
+
+            $total = count($bikes);
+
+            $miperfil = TRUE;
+
+            return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'miperfil' => $miperfil ])
+                ->with('success' , "Moto $bike->marca $bike->modelo restaurada en la base de datos correctamente");
+        }
+
+
     }
 
 

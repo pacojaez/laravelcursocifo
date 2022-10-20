@@ -30,7 +30,7 @@
         <!-- ruta firmada-->
         {{-- <form class="mt-2" action="{{ URL::signedRoute ('bike.destroy', ['bike' => $bike]) }}" method="POST"> --}}
         <!-- ruta firmada durante un minuto -->
-        <form class="mt-2" action="{{ URL::temporarySignedRoute('bike.destroy', now()->addSeconds(5), ['bike' => $bike]) }}" method="POST">
+        <form class="mt-2" action="{{ URL::temporarySignedRoute('bike.destroy', now()->addSeconds(35), ['bike' => $bike]) }}" method="POST">
             @csrf
             <input type="hidden" name="_method" value="DELETE">
             <div class="flex justify-center mt-6">
