@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\FirstBikeCreated;
-use App\Events\MoreBikes;
-use App\Events\OneThousandVisits;
 use Auth;
 use Gate;
 use App\Models\Bike;
+use App\Models\User;
+
+use App\Events\MoreBikes;
 use Illuminate\Http\Request;
+use App\Events\FirstBikeCreated;
+use App\Events\OneThousandVisits;
 use App\Http\Requests\BikeRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -101,6 +103,11 @@ class BikeController
                 $request->user()->first_bike_created = 1;
                 $request->user()->save();
             }
+        }
+        $userMaxBikes = User::with('bikes')->get()->max('bikes');
+
+        if( $userMaxBikes->value('user_id') == $bike->user->id ){
+            MoreBikes::dispatch( $bike );
         }
 
         return redirect()->route('bike.show', $bike)

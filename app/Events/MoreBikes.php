@@ -14,13 +14,11 @@ class MoreBikes
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user;
     public $bike;
 
-    public function __construct( $bike, $user)
+    public function __construct( $bike )
     {
         $this->bike = $bike;
-        $this->user = $user;
     }
 
     // public function broadcastOn(): Channel|array

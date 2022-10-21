@@ -32,11 +32,11 @@ class SendMoreBikesCongratulation
         $mensaje = new \stdClass();
 
         $mensaje->asunto = "ERES EL USUARIO CON MÁS MOTOS!!!!!";
-        $mensaje->email = $event->user->email;
-        $mensaje->nombre = $event->user->name;
+        $mensaje->email = $event->bike->user->email;
+        $mensaje->nombre = $event->bike->user->name;
 
-        $mensaje->mensaje = "Gracias por tu primera aportación a LARABIKES. Hemos creado la moto $event->bike->marca ";
+        $mensaje->mensaje = "Con esta moto que has subido eres el usuario con más motos en LARABIKES.";
 
-        Mail::to( $event->user->email)->send(new Congratulation($mensaje));
+        Mail::to( $event->bike->user->email)->send(new Congratulation($mensaje));
     }
 }
