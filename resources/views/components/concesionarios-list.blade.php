@@ -17,7 +17,7 @@
                     <div class="flex flex-wrap justify-center pb-8 -mx-2">
                         <!-- begin: bike card -->
                         <template x-for="concesionario in concesionarios" :key="concesionario.id">
-                            <form action="{{ route('concesionario.bikes') }}" method="POST" class="flex flex-row">
+                            <form action="{{ route('concesionario.bikes') }}" method="GET" class="flex flex-row">
                                 @csrf
                                 <div class="flex flex-col md:flex-row place-items-center">
                                     <div class="w-full px-3">

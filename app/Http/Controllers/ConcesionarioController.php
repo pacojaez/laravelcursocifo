@@ -11,20 +11,15 @@ class ConcesionarioController
     public function concesionarioBikes( Request $request )
     {
         $request->validate([
-            'name' => 'required|max:16',
+            'name' => 'required|max:30',
          ]);
 
-         $concesionario = Concesionario::where('name', 'like', $request->input('name'))->first();
+         $concesionario = Concesionario::where('name', 'like', $request->input('name'))->firstOrFail();
+// dd($concesionario);
+        $bikes = Bike::with('user')->where( "concesionario_id", "LIKE", $concesionario->id )->get();
+        $total = count($bikes);
+        $bikes = Bike::where( "concesionario_id", "LIKE", $concesionario->id )->orderBy('id', 'ASC')->paginate(12)->appends(['name'=> $concesionario->name ]);
 
-         $bikes = Bike::where( "concesionario_id", "LIKE", $concesionario->id )->get();
-
-         $total = count($bikes);
-
-         $bikes = Bike::with('user')
-            ->with('concesionario')
-            ->where( "concesionario_id", "LIKE", $concesionario->id )
-            ->paginate(12);
-
-         return view('bikes.list', ['bikes' => $bikes, 'total' => $total, 'marca'=> '', 'modelo' => '']);
+         return view('concesionario.list', ['bikes' => $bikes, 'total' => $total, 'concesionario' => $concesionario, 'name' => $concesionario->name ]);
     }
 }

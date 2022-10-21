@@ -137,10 +137,11 @@ class UserController
     }
 
     public function trashed (){
-        $users = User::with('roles')->onlyTrashed()->orderBy('id', 'ASC')->withCount('bikes')->get();
-        // $user = User::first();
-        // foreach($user->roles as $role)
-        //     dd($role);
+        $users = User::onlyTrashed()->with('roles')->orderBy('id', 'ASC')->get();
+
+        foreach ($users as $user){
+            $user->bikes_count = count($user->bikes()->withTrashed()->get());
+        }
 
         return view('users.list', [
             'users' => $users

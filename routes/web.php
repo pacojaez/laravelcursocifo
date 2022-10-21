@@ -49,6 +49,9 @@ Route::get('/bike/show/{bike}', [BikeController::class, 'show'])->name('bike.sho
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'sendMail'])->name('email.contact');
 
+Route::get('/concesionario', [ConcesionarioController::class, 'concesionarioBikes'])->name('concesionario.bikes');
+
+
 //****************** FIN GRUPO **********************************/
 
 //****************** GRUPO DE RUTAS PARA AÑADIR ->middleware('isAdmin) **********************************/
@@ -67,10 +70,6 @@ Route::prefix('admin')->group( function(){
     Route::get('/bike/userTrashed/{user}', [BikeController::class, 'userTrashedBikes'])->name('userTrashedBikes');
     Route::get('/bikeRestore/{id}', [BikeController::class, 'bikeRestore'])->name('bike.restore');
     Route::delete('/bikepurge/{id}', [BikeController::class, 'purgeBike'])->name('bike.purge');
-
-
-
-    Route::post('/concesionario', [ConcesionarioController::class, 'concesionarioBikes'])->name('concesionario.bikes');
 
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
     Route::get('/users', [UserController::class, 'index'])->name('users.list')->middleware('auth');

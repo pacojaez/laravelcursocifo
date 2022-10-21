@@ -332,15 +332,13 @@ class BikeController
 
         $bike->restore();
 
-
         if( Auth::user()->hasRoles(['SUPERADMIN'])){
             $bikes = Bike::with('user')->with('concesionario')->orderBy('id', 'ASC')->paginate(12);
-            // $bikes = Bike::orderBy('id', 'ASC')->paginate(12);
 
             $total = Bike::count();
 
-            return view('bikes.list', ['bikes' => $bikes, 'total' => $total])
-                    ->with('success' , "Moto $bike->marca $bike->modelo restaurada en la base de datos correctamente");
+            return redirect()->route('bike.index', ['bikes' => $bikes])
+                ->with('success' , "Moto $bike->marca $bike->modelo restaurada en la base de datos correctamente");
 
         }else{
             $bikes = Bike::where('user_id', 'LIKE', Auth::user()->id )->paginate(12);
