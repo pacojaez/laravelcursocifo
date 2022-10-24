@@ -91,25 +91,30 @@
                                 <p class="self-center text-xs font-bold">Las motos solo las pueden editar sus propietarios </p>
                             @endcannot
                             @can('update', $bike)
+                            @if(  $bike->user->deleted_at == NULL )
+                            <div class="flex justify-center mt-6">
+                                <a href="{{ route('bike.restore', ['id' => $bike->id]) }}">
+                                    <p
+                                        class="px-3 py-2 mt-6 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-green-500 rounded-md dark:bg-green-600 dark:hover:bg-green-700 dark:focus:bg-green-700 hover:bg-green-600 focus:outline-none focus:bg-green-500 focus:ring focus:ring-green-300 focus:ring-opacity-50">
+                                        RESTAURAR MOTO
+                                    </p>
+                                </a>
+                            </div>
+                            <form class="mt-2" action="{{ route('bike.purge', ['id' => $bike->id]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="bike_id" value="{{ $bike->id }}">
                                 <div class="flex justify-center mt-6">
-                                    <a href="{{ route('bike.restore', ['id' => $bike->id]) }}">
-                                        <p
-                                            class="px-3 py-2 mt-6 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-green-500 rounded-md dark:bg-green-600 dark:hover:bg-green-700 dark:focus:bg-green-700 hover:bg-green-600 focus:outline-none focus:bg-green-500 focus:ring focus:ring-green-300 focus:ring-opacity-50">
-                                            RESTAURAR MOTO
-                                        </p>
-                                    </a>
+                                    <button type="submit"
+                                        class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-red-500 rounded-md dark:bg-red-600 dark:hover:bg-red-700 dark:focus:bg-red-700 hover:bg-red-600 focus:outline-none focus:bg-red-500 focus:ring focus:ring-red-300 focus:ring-opacity-50">
+                                        ELIMINAR PERMANENTEMENTE
+                                    </button>
                                 </div>
-                                <form class="mt-2" action="{{ route('bike.purge', ['id' => $bike->id]) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="bike_id" value="{{ $bike->id }}">
-                                    <div class="flex justify-center mt-6">
-                                        <button type="submit"
-                                            class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-red-500 rounded-md dark:bg-red-600 dark:hover:bg-red-700 dark:focus:bg-red-700 hover:bg-red-600 focus:outline-none focus:bg-red-500 focus:ring focus:ring-red-300 focus:ring-opacity-50">
-                                            ELIMINAR PERMANENTEMENTE
-                                        </button>
-                                    </div>
-                                </form>
+                            </form>
+                            @else
+                            <p class="self-center text-xs font-bold">Las motos solo se pueden restaurar si son de usuarios dados de alta </p>
+                            @endif
+
                             @endcan
                             {{-- @endif --}}
 

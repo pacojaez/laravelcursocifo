@@ -12,7 +12,9 @@ class IsAdmin
     {
         // if (auth()->check() && auth()->user()->is_admin)
         // return $next($request);
+        if( !$request->user()->hasRoles('SUPERADMIN'))
+            abort(403, 'Acceso denegado, debes ser administrador para realizar estas tareas');
 
-        return view('errors.403');
+        return $next($request);
     }
 }

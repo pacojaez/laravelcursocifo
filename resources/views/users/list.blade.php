@@ -37,12 +37,21 @@
                                         ROLES
                                     </th>
                                     @can('update', Auth::user())
-                                        <th class="px-6 py-2 text-xs text-gray-500">
-                                            EDITAR
-                                        </th>
-                                        <th class="p-8 text-xs text-gray-500">
-                                            ELIMINAR (CON SOFTDELETES)
-                                        </th>
+                                        @if ($pagina == 'users.list')
+                                            <th class="px-6 py-2 text-xs text-gray-500">
+                                                EDITAR
+                                            </th>
+                                            <th class="p-8 text-xs text-gray-500">
+                                                ELIMINAR (CON SOFTDELETES)
+                                            </th>
+                                        @elseif($pagina == 'users.trashed')
+                                            <th class="px-6 py-2 text-xs text-gray-500">
+                                                RESTAURAR
+                                            </th>
+                                            <th class="p-8 text-xs text-gray-500">
+                                                ELIMINAR (CON FORCEDELETES)
+                                            </th>
+                                        @endif
                                     @endcan
                                 </tr>
                             </thead>
@@ -80,16 +89,18 @@
                                                         class="px-4 py-1 text-xs text-white bg-blue-400 rounded">
                                                         Restore
                                                     </a>
-                                                    <form class="" action="{{ route('user.purge', ['id' => $user->id ]) }}"
+                                                </td>
+                                                <td class="px-6 py-4 text-center">
+                                                    <form class="" action="{{ route('user.purge', ['id' => $user->id]) }}"
                                                         method="POST">
                                                         @csrf
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
 
-                                                            <button type="submit"
+                                                        <button type="submit"
                                                             class="px-4 py-1 text-xs text-white bg-red-400 rounded">
-                                                                FORCE DELETE
-                                                            </button>
+                                                            FORCE DELETE
+                                                        </button>
                                                     </form>
                                                 </td>
                                             @elseif ($pagina == 'users.list')
@@ -100,16 +111,16 @@
                                                     </a>
                                                 </td>
                                                 <td class="px-6 py-4 text-center">
-                                                    <form class="" action="{{ route('user.destroy', ['user' => $user ]) }}"
+                                                    <form class="" action="{{ route('user.destroy', ['user' => $user]) }}"
                                                         method="POST">
                                                         @csrf
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
 
-                                                            <button type="submit"
+                                                        <button type="submit"
                                                             class="px-4 py-1 text-xs text-white bg-red-400 rounded">
-                                                                BORRAR
-                                                            </button>
+                                                            BORRAR
+                                                        </button>
                                                     </form>
 
                                                 </td>

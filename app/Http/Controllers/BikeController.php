@@ -309,10 +309,8 @@ class BikeController
      public function userTrashedBikes( ){
 
         if( Auth::user()->hasRoles(['SUPERADMIN'])){
-            $bikes = Bike::onlyTrashed()->paginate(12);
+            $bikes = Bike::onlyTrashed()->with('user')->paginate(12);
             $total = count(Bike::onlyTrashed()->get());
-
-
         }else{
             $bikes = Auth::user()->bikes()->onlyTrashed()->paginate(12);
             $total = count($bikes);
