@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BikeApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Bike;
@@ -54,3 +55,19 @@ Route::get('/concesionarios', function(){
     // dd($json);
     return response($json)->header('Content-Type', 'application/json');
 })->name('concesionarios');
+
+/**
+ * rutas API MOTOS
+ */
+Route::get( '/motos', [BikeApiController::class, 'index']);
+Route::get('/moto/{bike}', [BikeApiController::class, 'show'])->where('bike', '^\d+$');
+Route::get('/moto/{campo}/{valor}', [BikeApiController::class, 'search'])->where('campo', '^marca|modelo|matricula$');
+Route::post('/moto', [BikeApiController::class, 'store']);
+Route::put('/moto/update/{id}', [BikeApiController::class, 'update']);
+Route::delete('/moto/delete/{id}', [BikeApiController::class, 'delete']);
+/**
+ * FALLBACK ROUTE
+ */
+Route::fallback(function(){
+    return response(['status' => 'BAD REQUEST'], 400);
+});

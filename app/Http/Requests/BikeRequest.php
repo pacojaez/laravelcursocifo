@@ -18,10 +18,11 @@ class BikeRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'marca' =>'required|max:255',
             'modelo' =>'required|max:255',
-            'kms' =>'required|integer',
+            'kms' =>'required|numeric',
             'caballos' =>'required|max:255',
             'color' =>'required|max:255',
             'matriculada' =>'required_with:matricula',
