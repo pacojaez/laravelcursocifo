@@ -49,7 +49,7 @@ class BikeApiController extends Controller
 
 
         $datos = $request->json()->all();
-
+// dd($datos);
         $datos['imagen'] = NULL;
         $datos['user_id'] = NULL;
 
