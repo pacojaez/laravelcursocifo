@@ -22,7 +22,7 @@ class BikePolicy
 
     public function create(User $user)
     {
-        return TRUE;
+        return $user->hasVerifiedEmail();
     }
 
     public function update( User $user, Bike $bike )

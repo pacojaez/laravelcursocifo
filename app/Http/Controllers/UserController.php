@@ -15,6 +15,7 @@ class UserController
     //
     public function index(){
 
+
         $users = User::with('roles')->orderBy('id', 'ASC')->withCount('bikes')->get();
         // $user = User::first();
         // foreach($user->roles as $role)
@@ -89,9 +90,16 @@ class UserController
 
         $user->update($request->only('name', 'email', 'ciudad', 'provincia', 'telefono'));
 
-        return back()
-                ->with('success' , "Usuario  $user->name actualizado correctamente");
+        // return back()
+        //         ->with('success' , "Usuario  $user->name actualizado correctamente");
+        $users = User::with('roles')->orderBy('id', 'ASC')->withCount('bikes')->get();
+
+        return view('users.list', [
+            'users' => $users
+            ])
+            ->with('success' , "Role del usuario  $user->name borrado correctamente");
     }
+
 
     public function removeRole(  Request $request )
     {
@@ -104,7 +112,7 @@ class UserController
         return view('users.list', [
             'users' => $users
             ])
-            ->with('success' , "Role del usuario  $user->name borrado correctamente");;
+            ->with('success' , "Role del usuario  $user->name borrado correctamente");
     }
 
     public function destroy( User $user )

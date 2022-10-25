@@ -18,6 +18,10 @@ class DeleteUnusedImages extends Controller {
         $total = 0;
         foreach ($files as $file) {
             $ex = explode("/" , $file);
+
+            if( $ex[3] == 'noimage.png')
+                continue;
+
             // comprobamos que la imagen no está en la DB
             $imageHasBike = Bike::where('image', 'like', $ex[3] )->first();
             if( $imageHasBike ) {

@@ -30,7 +30,7 @@ Route::get('/clearcache', function() {
     Artisan::call('view:clear');
     Artisan::call('optimize:clear');
     return view('components.cachecleared');
-})->name('clearcache');
+})->name('clearcache')->middleware('isAdmin');
 //****************** FIN RUTA **********************************/
 
 //****************** GRUPO DE RUTAS ABIERTAS SIN MIDDLEWARE **********************************/

@@ -18,9 +18,15 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use App\Services\BikePhotoUploadService;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 
 class BikeController
 {
+
+    // public function __construct (){
+    //     $this->middleware('verified')->except('index', 'show', 'search');
+    // }
+
     public function index()
     {
         $bikes = Bike::with('user')->with('concesionario')->orderBy('id', 'ASC')->paginate(12);
@@ -90,7 +96,7 @@ class BikeController
 
         }else{
             $datos = $request->except('image');
-            $datos += ['image' => NULL ];
+            $datos += ['image' => 'noimage.png' ];
             if( $request->input('matricula')){
                 $datos += ['matriculada' => TRUE];
             }

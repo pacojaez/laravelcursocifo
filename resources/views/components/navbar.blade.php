@@ -4,7 +4,8 @@
 
         <div class="flex flex-row items-center">
             <a class="ml-0 mr-auto nav-brand" href="{{ url('/') }}">
-                <img src="{{ asset('img/components/logolarabikes.png')}}" style="height:200px; width:200px" alt="logoLarabikes"/>
+                <img src="{{ asset('img/components/logolarabikes.png') }}" style="height:200px; width:200px"
+                    alt="logoLarabikes" />
             </a>
             {{-- <p> LARABIKES</p> --}}
             <button navbar-trigger="" class="mb-0 ml-auto mr-0 navbar-trigger lg:hidden xl:hidden" type="button"
@@ -18,6 +19,7 @@
                 </span>
             </button>
         </div>
+
         <div class="collapse navbar-collapse" navbar-menu="">
             <!-- search bar -->
             <x-bike-search />
@@ -41,26 +43,31 @@
                         <span>Github</span>
                     </a>
                 </li>
+
                 @auth
-                    <li>
-                        <a class="nav-link" href="{{ route('bike.create') }}">
-                            <i class="mr-2 text-base material-icons opacity-60">apps</i>
-                            <span class="{{ $pagina == 'bike.create' ? 'underline font-bold' : '' }}">CREAR MOTO</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ route('bike.editLast') }}">
-                            <i class="mr-2 text-base material-icons opacity-60">apps</i>
-                            <span class="{{ $pagina == 'bike.editLast' ? 'underline font-bold' : '' }}">LAST UPDATED</span>
-                        </a>
-                    </li>
-                    <li class="flex">
-                        <a class="nav-link" href="{{ route('bike.cleanBikeDirectory') }}">
-                            <i class="mr-2 text-base material-icons opacity-60"></i>
-                            <span class="{{ $pagina == 'cleanBikeDirectory' ? 'underline font-bold' : '' }}">CLEAN BIKES
-                                DIR</span>
-                        </a>
-                    </li>
+                    @can('create', new App\Models\Bike())
+                        <li>
+                            <a class="nav-link" href="{{ route('bike.create') }}">
+                                <i class="mr-2 text-base material-icons opacity-60">apps</i>
+                                <span class="{{ $pagina == 'bike.create' ? 'underline font-bold' : '' }}">CREAR MOTO</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{{ route('bike.editLast') }}">
+                                <i class="mr-2 text-base material-icons opacity-60">apps</i>
+                                <span class="{{ $pagina == 'bike.editLast' ? 'underline font-bold' : '' }}">LAST UPDATED</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('update', new App\Models\User())
+                        <li class="flex">
+                            <a class="nav-link" href="{{ route('bike.cleanBikeDirectory') }}">
+                                <i class="mr-2 text-base material-icons opacity-60"></i>
+                                <span class="{{ $pagina == 'cleanBikeDirectory' ? 'underline font-bold' : '' }}">CLEAN BIKES
+                                    DIR</span>
+                            </a>
+                        </li>
+                    @endcan
                     <li class="flex">
                         <a class="nav-link" href="{{ route('testwelcome') }}">
                             <i class="mr-2 text-base material-icons opacity-60"></i>
@@ -93,25 +100,27 @@
                                 <span class="{{ $pagina == 'bike.myBikes' ? 'underline font-bold' : '' }}">MIS MOTOS</span>
                             </a>
                         </li>
-                        <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
-                            <a class="nav-link" href="{{ route('userTrashedBikes', ['user'=> Auth::user() ]) }}">
-                                {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
-                                <span class="{{ $pagina == 'userTrashedBikes' ? 'underline font-bold' : '' }}">MOTOS BORRADAS</span>
-                            </a>
-                        </li>
-                        @can('view', Auth::user() )
-                        <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
-                            <a class="nav-link" href="{{ route('users.list') }}">
-                                {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
-                                <span class="{{ $pagina == 'users.list' ? 'underline font-bold' : '' }}">USUARIOS</span>
-                            </a>
-                        </li>
-                        <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
-                            <a class="nav-link" href="{{ route('users.trashed') }}">
-                                {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
-                                <span class="{{ $pagina == 'users.trashed' ? 'underline font-bold' : '' }}">USUARIOS DADOS DE BAJA</span>
-                            </a>
-                        </li>
+                        @can('view', Auth::user())
+                            <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
+                                <a class="nav-link" href="{{ route('userTrashedBikes', ['user' => Auth::user()]) }}">
+                                    {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
+                                    <span class="{{ $pagina == 'userTrashedBikes' ? 'underline font-bold' : '' }}">MOTOS
+                                        BORRADAS</span>
+                                </a>
+                            </li>
+                            <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
+                                <a class="nav-link" href="{{ route('users.list') }}">
+                                    {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
+                                    <span class="{{ $pagina == 'users.list' ? 'underline font-bold' : '' }}">USUARIOS</span>
+                                </a>
+                            </li>
+                            <li class="px-3 py-1 rounded-sm hover:bg-gray-100">
+                                <a class="nav-link" href="{{ route('users.trashed') }}">
+                                    {{-- <i class="mr-2 text-base material-icons opacity-60"></i> --}}
+                                    <span class="{{ $pagina == 'users.trashed' ? 'underline font-bold' : '' }}">USUARIOS DADOS
+                                        DE BAJA</span>
+                                </a>
+                            </li>
                         @endcan
                     </x-login-drop-down>
                 @else
