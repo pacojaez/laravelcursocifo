@@ -91,7 +91,7 @@
                                 <p class="self-center text-xs font-bold">Las motos solo las pueden editar sus propietarios </p>
                             @endcannot
                             @can('update', $bike)
-                            @if(  $bike->user->deleted_at == NULL )
+                            @if( $bike->user->deleted_at== NULL )
                             <div class="flex justify-center mt-6">
                                 <a href="{{ route('bike.restore', ['id' => $bike->id]) }}">
                                     <p

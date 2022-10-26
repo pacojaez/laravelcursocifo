@@ -127,10 +127,8 @@
         </div>
     </form>
     <div class="flex flex-row justify-center">
-        <a href="{{ route('bike.destroy', ['bike' => $bike]) }}" class="">
-
-            <button
-                class="inline-flex items-center justify-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800">
+        <a href="{{ route('bike.delete', ['bike' => $bike]) }}">
+            <button Class="inline-flex items-center justify-center h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-red-700 rounded-lg hover:bg-red-800">
                 BORRAR MOTO
             </button>
         </a>
